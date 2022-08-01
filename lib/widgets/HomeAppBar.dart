@@ -6,7 +6,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.all(25),
+      padding: EdgeInsets.only(top: 30, right: 25, left: 25, bottom: 15),
       child: Row(
         children: [
           const Icon(

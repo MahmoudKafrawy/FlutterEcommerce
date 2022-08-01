@@ -1,5 +1,7 @@
 import 'package:ecommerce/widgets/CategoriesWidget.dart';
 import 'package:ecommerce/widgets/HomeAppBar.dart';
+import 'package:ecommerce/widgets/ItemsWidget.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -39,6 +41,7 @@ class HomePage extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
+                            //search
                             Flexible(
                               child: Container(
                                 margin: EdgeInsets.only(left: 5),
@@ -58,11 +61,32 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      CarouselSlider(
+                        options: CarouselOptions(height: 150),
+                        items: [1, 2, 3, 4, 5].map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 2.0),
+                                  decoration:
+                                      BoxDecoration(color: Colors.amber),
+                                  child: Text(
+                                    'text $i',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ));
+                            },
+                          );
+                        }).toList(),
+                      ),
                       Container(
                         alignment: Alignment.centerLeft,
                         margin:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                        child: Text(
+                        child: const Text(
                           "Categories",
                           style: TextStyle(
                               fontSize: 25,
@@ -70,7 +94,22 @@ class HomePage extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      CategoriesWidget()
+
+                      //Categories
+                      CategoriesWidget(),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                        child: const Text(
+                          "Best Selling",
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Color(0xFF4c53a5),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      ItemsWidget()
                     ],
                   ),
                 ),
