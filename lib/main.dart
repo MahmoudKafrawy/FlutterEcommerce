@@ -9,15 +9,40 @@ import 'package:ecommerce/pages/Product.dart';
 import 'package:ecommerce/pages/SignedIn.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/HomePage.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light, // For iOS (dark icons)
+// For Android (dark icons)
+    ),
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        // appBarTheme: AppBarTheme(
+        //   iconTheme: IconThemeData(color: Colors.black),
+        //   color: Colors.deepPurpleAccent,
+        //   foregroundColor: Colors.black,
+        //   systemOverlayStyle: SystemUiOverlayStyle(
+        //     //<-- SEE HERE
+        //     // Status bar color
+        //     statusBarColor: Colors.red,
+        //     statusBarIconBrightness: Brightness.dark,
+        //     statusBarBrightness: Brightness.light,
+        //   ),
+        // ),
+      ),
       routes: {
         "/": (context) => HomePage(),
         "/categories": (context) => Categories(),

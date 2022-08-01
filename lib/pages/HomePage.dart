@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
             child: ListView(
               children: [
                 Container(
-                  height: 900,
                   padding: EdgeInsets.only(top: 15),
                   decoration: const BoxDecoration(
                     color: Color(0xFFedecf2),
