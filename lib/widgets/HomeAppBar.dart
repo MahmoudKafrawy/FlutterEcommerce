@@ -47,7 +47,7 @@ class HomeAppBar extends StatelessWidget {
             badgeColor: Colors.red,
             padding: EdgeInsets.all(7),
             badgeContent: Text(
-              "3",
+              "5",
               style: TextStyle(color: Colors.white),
             ),
             child: InkWell(
