@@ -6,7 +6,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.all(25),
+      padding: EdgeInsets.only(top: 30, right: 25, left: 25, bottom: 15),
       child: Row(
         children: [
           const Icon(
@@ -47,7 +47,7 @@ class HomeAppBar extends StatelessWidget {
             badgeColor: Colors.red,
             padding: EdgeInsets.all(7),
             badgeContent: Text(
-              "3",
+              "5",
               style: TextStyle(color: Colors.white),
             ),
             child: InkWell(
