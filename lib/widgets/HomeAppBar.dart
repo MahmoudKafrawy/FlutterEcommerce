@@ -51,7 +51,7 @@ class HomeAppBar extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             child: InkWell(
-                onTap: () {},
+                onTap: () => {Navigator.pushNamed(context, "/categories")},
                 child: Icon(
                   Icons.shopping_bag_outlined,
                   color: Color(0xFF4c53a5),
