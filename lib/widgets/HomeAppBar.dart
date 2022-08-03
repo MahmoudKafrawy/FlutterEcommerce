@@ -41,22 +41,23 @@ class HomeAppBar extends StatelessWidget {
                 )),
           ),
           SizedBox(
-            width: 10,
+            width: 25,
           ),
-          Badge(
-            badgeColor: Colors.red,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text(
-              "5",
-              style: TextStyle(color: Colors.white),
+          InkWell(
+            onTap: () => {Navigator.pushNamed(context, "/cart")},
+            child: Badge(
+              badgeColor: Colors.red,
+              padding: EdgeInsets.all(7),
+              badgeContent: Text(
+                "5",
+                style: TextStyle(color: Colors.white),
+              ),
+              child: Icon(
+                Icons.shopping_bag_outlined,
+                color: Color(0xFF4c53a5),
+                size: 30,
+              ),
             ),
-            child: InkWell(
-                onTap: () => {Navigator.pushNamed(context, "/categories")},
-                child: Icon(
-                  Icons.shopping_bag_outlined,
-                  color: Color(0xFF4c53a5),
-                  size: 30,
-                )),
           ),
         ],
       ),
