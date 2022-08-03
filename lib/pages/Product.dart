@@ -1,9 +1,18 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../widgets/ProductAppBar.dart';
 
 class Product extends StatelessWidget {
+  List<Color> clrs = [
+    Colors.red,
+    Colors.green,
+    Colors.blue,
+    Colors.indigo,
+    Colors.orange
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,23 +63,128 @@ class Product extends StatelessWidget {
             },
           ),
           Container(
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 10),
-                ]),
-            child: Icon(
-              CupertinoIcons.plus,
-              size: 18,
-            ),
-          ),
+              child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 10),
+                    ]),
+                child: Icon(
+                  CupertinoIcons.plus,
+                  size: 18,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
+                child: Text("1"),
+              ),
+              Container(
+                padding: EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 10),
+                    ]),
+                child: Icon(
+                  CupertinoIcons.minus,
+                  size: 18,
+                ),
+              )
+            ],
+          ))
         ]),
-      )
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+        child: Text(
+          "More detailes about product the product you can write here",
+          textAlign: TextAlign.justify,
+          style: TextStyle(fontSize: 12, color: Color(0xFF4c53a5)),
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+        child: Row(
+          children: [
+            Text(
+              "Size :",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF4c53a5),
+                  fontSize: 15),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Row(
+              children: [
+                for (int i = 1; i < 6; i++)
+                  Container(
+                      padding: EdgeInsets.all(4),
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 10),
+                          ]),
+                      child: Text("$i"))
+              ],
+            )
+          ],
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+        child: Row(
+          children: [
+            Text(
+              "Colors :",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF4c53a5),
+                  fontSize: 15),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Row(
+              children: [
+                for (int i = 0; i < 5; i++)
+                  Container(
+                    width: 20,
+                    height: 20,
+                    padding: EdgeInsets.all(4),
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                        color: clrs[i],
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 10),
+                        ]),
+                  )
+              ],
+            )
+          ],
+        ),
+      ),
     ]));
   }
 }
