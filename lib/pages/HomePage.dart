@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                                   decoration:
                                       BoxDecoration(color: Colors.amber),
                                   child: Text(
-                                    'text $i',
+                                    'text ',
                                     style: TextStyle(fontSize: 16.0),
                                   ));
                             },

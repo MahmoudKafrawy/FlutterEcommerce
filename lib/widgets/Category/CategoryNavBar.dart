@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget {
+class CategoryNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,7 +10,7 @@ class HomeAppBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, "/categories"),
             child: const Icon(
               Icons.sort,
               size: 30,
@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              "Shop",
+              "Category",
               style: TextStyle(
                   fontSize: 23,
                   color: Color(0xFF4c53a5),

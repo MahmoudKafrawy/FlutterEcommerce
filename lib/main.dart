@@ -3,10 +3,9 @@ import 'package:ecommerce/pages/Categories.dart';
 import 'package:ecommerce/pages/CheckOut.dart';
 import 'package:ecommerce/pages/Favorites.dart';
 import 'package:ecommerce/pages/Me.dart';
-import 'package:ecommerce/pages/NotSignedIn.dart';
 import 'package:ecommerce/pages/Payment.dart';
 import 'package:ecommerce/pages/Product.dart';
-import 'package:ecommerce/pages/SignedIn.dart';
+import 'package:ecommerce/pages/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/HomePage.dart';
 import 'package:flutter/services.dart';
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
         // ),
       ),
       routes: {
-        "/": (context) => HomePage(),
+        "/": (context) => Settings(),
         "/categories": (context) => Categories(),
         "/me": (context) => Me(),
         "/favorites": (context) => Favorites(),
@@ -52,8 +51,7 @@ class MyApp extends StatelessWidget {
         "/product": (context) => Product(),
         "/checkout": (context) => CheckOut(),
         "/payment": (context) => Payment(),
-        "/signedin": (context) => SignedIn(),
-        "/notsignin": (context) => NotSignedIn(),
+        "/setting": (context) => Settings(),
       },
     );
   }
