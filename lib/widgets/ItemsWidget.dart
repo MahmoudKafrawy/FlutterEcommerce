@@ -42,11 +42,20 @@ class ItemsWidget extends StatelessWidget {
                   )
                 ],
               ),
-              InkWell(
-                onTap: () => {Navigator.pushNamed(context, "/product")},
-                child: Container(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Image.asset("images/1.png"),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  customBorder: CircleBorder(),
+                  splashColor: Color(0xFF4c53a5),
+                  onTap: () => {
+                    Future.delayed(const Duration(milliseconds: 200), () {
+                      Navigator.pushNamed(context, "/product");
+                    })
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Image.asset("images/1.png"),
+                  ),
                 ),
               ),
               Container(
