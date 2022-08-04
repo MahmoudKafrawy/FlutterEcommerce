@@ -35,8 +35,8 @@ class HomeAppBar extends StatelessWidget {
               "1",
               style: TextStyle(color: Colors.white),
             ),
-            child: InkWell(
-                onTap: () {},
+            child: GestureDetector(
+                onTap: () => {Navigator.pushNamed(context, "/cart")},
                 child: Icon(
                   Icons.favorite,
                   color: Color(0xFF4c53a5),
@@ -44,22 +44,33 @@ class HomeAppBar extends StatelessWidget {
                 )),
           ),
           SizedBox(
-            width: 10,
+            width: 25,
           ),
-          Badge(
-            badgeColor: Colors.red,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text(
-              "5",
-              style: TextStyle(color: Colors.white),
-            ),
+          Material(
+            color: Colors.transparent,
             child: InkWell(
-                onTap: () => {Navigator.pushNamed(context, "/cart")},
+              customBorder: CircleBorder(),
+              splashColor: Color(0xFF4c53a5),
+              onTap: () => {
+                Future.delayed(const Duration(milliseconds: 200), () {
+                  Navigator.pushNamed(context, "/cart");
+                })
+                // Navigator.pushNamed(context, "/cart")
+              },
+              child: Badge(
+                badgeColor: Colors.red,
+                padding: EdgeInsets.all(7),
+                badgeContent: Text(
+                  "5",
+                  style: TextStyle(color: Colors.white),
+                ),
                 child: Icon(
                   Icons.shopping_bag_outlined,
                   color: Color(0xFF4c53a5),
                   size: 30,
-                )),
+                ),
+              ),
+            ),
           ),
         ],
       ),
