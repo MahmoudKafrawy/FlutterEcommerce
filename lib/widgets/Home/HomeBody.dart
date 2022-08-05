@@ -1,8 +1,7 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce/widgets/CategoriesWidget.dart';
-import 'package:ecommerce/widgets/HomeAppBar.dart';
-import 'package:ecommerce/widgets/ItemsWidget.dart';
+import 'package:ecommerce/widgets/Home/CategoriesWidget.dart';
+import 'package:ecommerce/widgets/Home/HomeAppBar.dart';
+import 'package:ecommerce/widgets/Home/ItemsWidget.dart';
 import 'package:flutter/material.dart';
 
 class HomeBody extends StatelessWidget {

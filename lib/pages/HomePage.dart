@@ -1,9 +1,9 @@
 import 'package:ecommerce/pages/Categories.dart';
 import 'package:ecommerce/pages/Me.dart';
-import 'package:ecommerce/widgets/CategoriesWidget.dart';
+import 'package:ecommerce/widgets/Home/CategoriesWidget.dart';
 import 'package:ecommerce/widgets/Home/HomeBody.dart';
-import 'package:ecommerce/widgets/HomeAppBar.dart';
-import 'package:ecommerce/widgets/ItemsWidget.dart';
+import 'package:ecommerce/widgets/Home/HomeAppBar.dart';
+import 'package:ecommerce/widgets/Home/ItemsWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 

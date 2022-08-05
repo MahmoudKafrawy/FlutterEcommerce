@@ -38,7 +38,7 @@ class CartItemSample extends StatelessWidget {
                       Text(
                         "Product title",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF4C53A5)),
                       ),
