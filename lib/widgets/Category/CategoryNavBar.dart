@@ -29,6 +29,7 @@ class CategoryNavBar extends StatelessWidget {
           ),
           Spacer(),
           Badge(
+            toAnimate: false,
             badgeColor: Colors.red,
             padding: EdgeInsets.all(7),
             badgeContent: Text(
@@ -47,6 +48,7 @@ class CategoryNavBar extends StatelessWidget {
             width: 25,
           ),
           Badge(
+            toAnimate: false,
             badgeColor: Colors.red,
             padding: EdgeInsets.all(7),
             badgeContent: Text(

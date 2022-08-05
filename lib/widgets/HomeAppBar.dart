@@ -29,6 +29,7 @@ class HomeAppBar extends StatelessWidget {
           ),
           Spacer(),
           Badge(
+            toAnimate: false,
             badgeColor: Colors.red,
             padding: EdgeInsets.all(7),
             badgeContent: Text(
@@ -58,6 +59,7 @@ class HomeAppBar extends StatelessWidget {
                 // Navigator.pushNamed(context, "/cart")
               },
               child: Badge(
+                toAnimate: false,
                 badgeColor: Colors.red,
                 padding: EdgeInsets.all(7),
                 badgeContent: Text(

@@ -65,7 +65,7 @@ class HomeBody extends StatelessWidget {
                       height: 15,
                     ),
                     CarouselSlider(
-                      options: CarouselOptions(height: 150),
+                      options: CarouselOptions(height: 175, autoPlay: true),
                       items: [1, 2, 3, 4, 5].map((i) {
                         return Builder(
                           builder: (BuildContext context) {
