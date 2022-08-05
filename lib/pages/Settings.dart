@@ -1,6 +1,7 @@
 import 'package:ecommerce/widgets/Category/CategoryGrid.dart';
 import 'package:ecommerce/widgets/Category/CategoryNavBar.dart';
 import 'package:ecommerce/widgets/SearchWidget.dart';
+import 'package:ecommerce/widgets/Settings/SettingAppBar.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatelessWidget {
@@ -9,8 +10,8 @@ class Settings extends StatelessWidget {
     return Scaffold(
       body: Column(children: [
         Container(
-          padding: EdgeInsets.only(top: 15),
-          child: CategoryNavBar(),
+          padding: EdgeInsets.only(top: 40),
+          child: SettingAppBar(),
         ),
         Flexible(
           child: MediaQuery.removePadding(

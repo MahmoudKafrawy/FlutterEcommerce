@@ -26,7 +26,7 @@ class Categories extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
                   SearchWidget(),
                   const SizedBox(
@@ -37,8 +37,8 @@ class Categories extends StatelessWidget {
                     children: [
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
-                        width: 80,
-                        height: 700,
+                        width: MediaQuery.of(context).size.width * 0.18,
+                        height: MediaQuery.of(context).size.height * 0.7,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -47,7 +47,7 @@ class Categories extends StatelessWidget {
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              for (int i = 1; i < 100; i++) Text("hello"),
+                              for (int i = 1; i < 10; i++) Text("hello"),
                             ],
                           ),
                         ),
@@ -55,7 +55,7 @@ class Categories extends StatelessWidget {
                       Flexible(
                         child: Container(
                             margin: EdgeInsets.only(right: 10),
-                            height: 700,
+                            height: MediaQuery.of(context).size.height * 0.7,
                             child:
                                 SingleChildScrollView(child: CategoryGrid())),
                       ),

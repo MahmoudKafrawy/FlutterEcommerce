@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget {
+class MeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,18 +9,12 @@ class HomeAppBar extends StatelessWidget {
       padding: EdgeInsets.only(top: 45, right: 25, left: 25, bottom: 15),
       child: Row(
         children: [
-          InkWell(
-            onTap: () {},
-            child: const Icon(
-              Icons.sort,
-              size: 30,
-              color: Color(0xFF4c53a5),
-            ),
-          ),
-          Padding(
+          Container(
+            margin:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.35),
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              "Shop",
+              "Me",
               style: TextStyle(
                   fontSize: 23,
                   color: Color(0xFF4c53a5),
@@ -28,21 +22,13 @@ class HomeAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Badge(
-            badgeColor: Colors.red,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text(
-              "1",
-              style: TextStyle(color: Colors.white),
-            ),
-            child: GestureDetector(
-                onTap: () => {Navigator.pushNamed(context, "/cart")},
-                child: Icon(
-                  Icons.favorite,
-                  color: Color(0xFF4c53a5),
-                  size: 30,
-                )),
-          ),
+          GestureDetector(
+              onTap: () => {Navigator.pushNamed(context, "/setting")},
+              child: Icon(
+                Icons.settings,
+                color: Color(0xFF4c53a5),
+                size: 30,
+              )),
           SizedBox(
             width: 25,
           ),

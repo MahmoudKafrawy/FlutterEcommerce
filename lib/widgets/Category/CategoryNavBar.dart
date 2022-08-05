@@ -10,7 +10,7 @@ class CategoryNavBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () => Navigator.pushNamed(context, "/categories"),
+            onTap: () {},
             child: const Icon(
               Icons.sort,
               size: 30,
@@ -44,7 +44,7 @@ class CategoryNavBar extends StatelessWidget {
                 )),
           ),
           SizedBox(
-            width: 10,
+            width: 25,
           ),
           Badge(
             badgeColor: Colors.red,
