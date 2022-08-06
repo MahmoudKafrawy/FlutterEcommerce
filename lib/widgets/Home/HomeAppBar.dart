@@ -74,6 +74,16 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            width: 20,
+          ),
+          GestureDetector(
+              onTap: () => {Navigator.pushNamed(context, "/location")},
+              child: Icon(
+                Icons.gps_fixed,
+                color: Color(0xFF4c53a5),
+                size: 30,
+              )),
         ],
       ),
     );

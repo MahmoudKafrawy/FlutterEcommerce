@@ -45,5 +45,7 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+  <string>This app needs your location to test the location feature of the Google Maps location picker plugin.</string>
 </dict>
 </plist>
