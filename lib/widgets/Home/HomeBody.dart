@@ -64,17 +64,17 @@ class HomeBody extends StatelessWidget {
                       height: 15,
                     ),
                     CarouselSlider(
-                      options: CarouselOptions(height: 175, autoPlay: true),
-                      items: [1, 2, 3, 4, 5].map((i) {
+                      options: CarouselOptions(height: 120, autoPlay: true),
+                      items: [1, 2, 3, 4].map((i) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
                                 width: MediaQuery.of(context).size.width,
                                 margin: EdgeInsets.symmetric(horizontal: 2.0),
                                 decoration: BoxDecoration(color: Colors.amber),
-                                child: Text(
-                                  'text ',
-                                  style: TextStyle(fontSize: 16.0),
+                                child: Image.asset(
+                                  "assets/ads/${i}.gif",
+                                  fit: BoxFit.cover,
                                 ));
                           },
                         );

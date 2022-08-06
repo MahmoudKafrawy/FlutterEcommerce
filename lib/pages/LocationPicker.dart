@@ -125,8 +125,8 @@ class _LocationPickerState extends State<LocationPicker> {
 
   @override
   Widget build(BuildContext context) {
-    getLocation();
     chkGPS();
+    getLocation();
     getGPS();
     return Scaffold(
         body: position == null

@@ -28,21 +28,32 @@ class HomeAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          Badge(
-            toAnimate: false,
-            badgeColor: Colors.red,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text(
-              "1",
-              style: TextStyle(color: Colors.white),
-            ),
-            child: GestureDetector(
-                onTap: () => {Navigator.pushNamed(context, "/cart")},
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              customBorder: CircleBorder(),
+              splashColor: Color(0xFF4c53a5),
+              onTap: () => {
+                Future.delayed(const Duration(milliseconds: 200), () {
+                  Navigator.pushNamed(context, "/favorites");
+                })
+                // Navigator.pushNamed(context, "/cart")
+              },
+              child: Badge(
+                toAnimate: false,
+                badgeColor: Colors.red,
+                padding: EdgeInsets.all(7),
+                badgeContent: Text(
+                  "2",
+                  style: TextStyle(color: Colors.white),
+                ),
                 child: Icon(
-                  Icons.favorite,
+                  Icons.favorite_border_outlined,
                   color: Color(0xFF4c53a5),
                   size: 30,
-                )),
+                ),
+              ),
+            ),
           ),
           SizedBox(
             width: 25,
