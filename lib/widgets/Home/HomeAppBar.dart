@@ -10,7 +10,7 @@ class HomeAppBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () => {Navigator.pushNamed(context, "/login")},
             child: const Icon(
               Icons.sort,
               size: 30,

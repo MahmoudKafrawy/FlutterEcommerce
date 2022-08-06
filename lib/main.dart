@@ -2,6 +2,7 @@ import 'package:ecommerce/pages/Cart.dart';
 import 'package:ecommerce/pages/Categories.dart';
 import 'package:ecommerce/pages/CheckOut.dart';
 import 'package:ecommerce/pages/Favorites.dart';
+import 'package:ecommerce/pages/LogIn.dart';
 import 'package:ecommerce/pages/LocationPicker.dart';
 import 'package:ecommerce/pages/Me.dart';
 import 'package:ecommerce/pages/Payment.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         "/checkout": (context) => CheckOut(),
         "/payment": (context) => Payment(),
         "/setting": (context) => Settings(),
+        "/login": (context) => LogIn(),
         "/location": (context) => LocationPicker(),
       },
     );
