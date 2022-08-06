@@ -17,16 +17,10 @@ class CartItemSample extends StatelessWidget {
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
             child: Row(
               children: [
-                Radio(
-                  value: "",
-                  groupValue: "",
-                  onChanged: (index) {},
-                  activeColor: Color(0xFF4C53A5),
-                ),
                 Container(
                   height: 70,
                   width: 70,
-                  margin: EdgeInsets.only(right: 15),
+                  margin: EdgeInsets.only(right: 15, left: 20),
                   child: Image.asset("assets/2.png"),
                 ),
                 Padding(

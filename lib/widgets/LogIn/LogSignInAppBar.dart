@@ -1,13 +1,12 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
-class SettingAppBar extends StatelessWidget {
-  const SettingAppBar({Key? key}) : super(key: key);
-
+class LogSignInAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.all(25),
+      padding: EdgeInsets.only(top: 45, right: 25, left: 25, bottom: 15),
       child: Row(
         children: [
           InkWell(
@@ -20,17 +19,18 @@ class SettingAppBar extends StatelessWidget {
               color: Color(0xFF4C53A5),
             ),
           ),
-          const Padding(
+          Container(
+            margin:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.25),
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              "Settings",
+              "Log in",
               style: TextStyle(
                   fontSize: 23,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4C53A5)),
+                  color: Color(0xFF4c53a5),
+                  fontWeight: FontWeight.bold),
             ),
           ),
-          const Spacer(),
         ],
       ),
     );

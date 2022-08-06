@@ -47,7 +47,21 @@ class Categories extends StatelessWidget {
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              for (int i = 1; i < 10; i++) Text("hello"),
+                              for (int i = 1; i < 10; i++)
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    textStyle: const TextStyle(
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Disabled',
+                                    style: TextStyle(
+                                        color: Color(0xFF4c53a5),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                             ],
                           ),
                         ),
