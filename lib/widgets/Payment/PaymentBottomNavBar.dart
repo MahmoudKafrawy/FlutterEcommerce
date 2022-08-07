@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CartBottomNavBar extends StatelessWidget {
-  const CartBottomNavBar({Key? key}) : super(key: key);
+class PaymentBottomNavBar extends StatelessWidget {
+  const PaymentBottomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class CartBottomNavBar extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\$250",
+                  "\$520",
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -41,7 +41,7 @@ class CartBottomNavBar extends StatelessWidget {
               child: InkWell(
                 onTap: () => {Navigator.pushNamed(context, "/payment")},
                 child: Text(
-                  "Check out",
+                  "Place Order",
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,

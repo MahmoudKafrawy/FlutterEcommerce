@@ -85,7 +85,7 @@ class HomeBody extends StatelessWidget {
                       margin:
                           EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                       child: const Text(
-                        "Categories",
+                        "Brands ",
                         style: TextStyle(
                             fontSize: 25,
                             color: Color(0xFF4c53a5),
