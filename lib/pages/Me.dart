@@ -1,3 +1,4 @@
+import 'package:ecommerce/pages/Favorites.dart';
 import 'package:ecommerce/widgets/Me/MeAppBar.dart';
 import 'package:ecommerce/widgets/Settings/SettingAppBar.dart';
 import 'package:flutter/material.dart';
@@ -99,12 +100,16 @@ class Me extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
+                          InkWell(
+                            onTap: () =>
+                                Navigator.pushNamed(context, "/favorites"),
+                            child: Text(
+                              'More',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline),
+                            ),
                           ),
                         ],
                       ),
