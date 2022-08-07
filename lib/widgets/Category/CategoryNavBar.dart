@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:ecommerce/pages/Favorites.dart';
 import 'package:flutter/material.dart';
 
 class CategoryNavBar extends StatelessWidget {
@@ -37,7 +38,9 @@ class CategoryNavBar extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, "/favorites");
+                },
                 child: Icon(
                   Icons.favorite,
                   color: Color(0xFF4c53a5),

@@ -10,7 +10,7 @@ class Settings extends StatelessWidget {
     return Scaffold(
       body: Column(children: [
         Container(
-          padding: EdgeInsets.only(top: 40),
+          padding: EdgeInsets.only(top: 20),
           child: SettingAppBar(),
         ),
         Flexible(

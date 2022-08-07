@@ -54,7 +54,7 @@ class CartItemSample extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.shopping_bag_outlined,
+                          Icons.favorite_border_outlined,
                           size: 35,
                           color: Color(0xFF4C53A5),
                         )
