@@ -1,108 +1,155 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class ItemsWidget extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:ecommerce/model/Product.dart';
+import 'package:http/http.dart' as http;
+
+class ItemsWidget extends StatefulWidget {
+  @override
+  State<ItemsWidget> createState() => _ItemsWidgetState();
+}
+
+class _ItemsWidgetState extends State<ItemsWidget> {
+  List<Product> productList = [];
+  late Product productItem;
+  Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
+
+  fetchData() async {
+    //Response   X= Future<Response>
+    http.Response response = await http.get(url);
+    List result = [];
+    if (response.statusCode == 200) {
+      result = jsonDecode(response.body);
+
+      setState(() {
+        for (int i = 0; i < result.length; i++) {
+          productItem = Product.fromJsonData(result[i]);
+          productList.add(productItem);
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      childAspectRatio: 0.68,
-      physics: NeverScrollableScrollPhysics(),
-      // crossAxisSpacing: 2,
-      // mainAxisSpacing: 2,
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      children: [
-        for (int i = 0; i < 8; i++)
-          Container(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20)),
-            child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: Color(0xFF4c53A5),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Text(
-                      "-50%",
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+    return productList.isEmpty
+        ? Center(child: CircularProgressIndicator())
+        : GridView.count(
+            childAspectRatio: 0.6,
+            physics: NeverScrollableScrollPhysics(),
+            // crossAxisSpacing: 2,
+            // mainAxisSpacing: 2,
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            children: [
+              for (int i = 0; i < productList.length; i++)
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                  margin: EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: Color(0xFF4c53A5),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Text(
+                            "-50%",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.favorite_border_outlined,
+                          size: 25,
+                          color: Colors.red,
+                        )
+                      ],
                     ),
-                  ),
-                  Spacer(),
-                  Icon(
-                    Icons.favorite_border_outlined,
-                    size: 25,
-                    color: Colors.red,
-                  )
-                ],
-              ),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  customBorder: CircleBorder(),
-                  splashColor: Color(0xFF4c53a5),
-                  onTap: () => {
-                    Future.delayed(const Duration(milliseconds: 200), () {
-                      Navigator.pushNamed(context, "/product");
-                    })
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Image.asset("images/1.png"),
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 10),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Title",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4c53A5)),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 5),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Description",
-                  style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4c53A5)),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "\$55",
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF4c53A5),
-                          fontWeight: FontWeight.bold),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        customBorder: CircleBorder(),
+                        splashColor: Color(0xFF4c53a5),
+                        onTap: () => {
+                          Future.delayed(const Duration(milliseconds: 200), () {
+                            Navigator.pushNamed(context, "/product",
+                                arguments: {
+                                  "name": productList[i].name,
+                                  "thumbnail": productList[i].thumbnail,
+                                  "description": productList[i].description
+                                });
+                          })
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Image(
+                            image: NetworkImage(productList[i].thumbnail!),
+                            height: 100,
+                          ),
+                        ),
+                      ),
                     ),
-                    Icon(
-                      Icons.add_shopping_cart_sharp,
-                      size: 25,
-                      color: Color(0xFF4c53A5),
+                    Container(
+                      padding: EdgeInsets.only(top: 10),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        productList[i].name!,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF4c53A5)),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 5),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        productList[i].description!,
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 124, 124, 124)),
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "\$${productList[i].price!}",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF4c53A5),
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Icon(
+                            Icons.add_shopping_cart_sharp,
+                            size: 25,
+                            color: Color(0xFF4c53A5),
+                          )
+                        ],
+                      ),
                     )
-                  ],
-                ),
-              )
-            ]),
-          )
-      ],
-    );
+                  ]),
+                )
+            ],
+          );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
   }
 }

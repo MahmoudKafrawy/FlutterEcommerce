@@ -2,11 +2,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/widgets/Home/CategoriesWidget.dart';
 import 'package:ecommerce/widgets/Home/HomeAppBar.dart';
 import 'package:ecommerce/widgets/Home/ItemsWidget.dart';
+
 import 'package:flutter/material.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
   const HomeBody({Key? key}) : super(key: key);
 
+  @override
+  State<HomeBody> createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [

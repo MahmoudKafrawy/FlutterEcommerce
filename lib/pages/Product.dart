@@ -11,8 +11,10 @@ class Product extends StatelessWidget {
     Colors.indigo,
     Colors.orange
   ];
+
   @override
   Widget build(BuildContext context) {
+    Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
     return Scaffold(
         body: Column(children: [
       Container(
@@ -22,8 +24,8 @@ class Product extends StatelessWidget {
       Padding(
         padding: EdgeInsets.all(16),
         child: Container(
-          child: Image.asset(
-            "images/1.png",
+          child: Image(
+            image: NetworkImage("${arguments['thumbnail']}"),
             height: 300,
           ),
         ),
@@ -32,7 +34,7 @@ class Product extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Row(children: [
           Text(
-            "Product name",
+            "${arguments['name']}",
             style: TextStyle(
                 fontSize: 25,
                 color: Color(0xFF4c53a5),
@@ -106,7 +108,7 @@ class Product extends StatelessWidget {
       Padding(
         padding: EdgeInsets.symmetric(vertical: 25, horizontal: 25),
         child: Text(
-          "More detailes about product the product you can write here",
+          "${arguments['description']}",
           textAlign: TextAlign.justify,
           style: TextStyle(fontSize: 12, color: Color(0xFF4c53a5)),
         ),
