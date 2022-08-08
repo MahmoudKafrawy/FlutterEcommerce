@@ -8,9 +8,11 @@ import 'package:ecommerce/pages/Me.dart';
 import 'package:ecommerce/pages/Payment.dart';
 import 'package:ecommerce/pages/Product.dart';
 import 'package:ecommerce/pages/Settings.dart';
+import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/HomePage.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -21,7 +23,9 @@ void main() {
 // For Android (dark icons)
     ),
   );
-  runApp(MyApp());
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => Counter())],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

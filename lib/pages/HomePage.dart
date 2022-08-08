@@ -62,17 +62,17 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(1),
                     decoration: BoxDecoration(
                       color: Colors.red,
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                     constraints: BoxConstraints(
-                      minWidth: 12,
-                      minHeight: 12,
+                      minWidth: 20,
+                      minHeight: 15,
                     ),
                     child: Text(
                       "5",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 8,
+                        fontSize: 12,
                       ),
                       textAlign: TextAlign.center,
                     ),

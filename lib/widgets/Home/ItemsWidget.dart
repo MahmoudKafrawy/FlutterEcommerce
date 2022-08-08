@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce/model/Product.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/favorites_counter.dart';
+
 class ItemsWidget extends StatefulWidget {
   @override
   State<ItemsWidget> createState() => _ItemsWidgetState();
@@ -67,10 +70,15 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                           ),
                         ),
                         Spacer(),
-                        Icon(
-                          Icons.favorite_border_outlined,
-                          size: 25,
-                          color: Colors.red,
+                        InkWell(
+                          onTap: (() {
+                            context.read<Counter>().increment();
+                          }),
+                          child: Icon(
+                            Icons.favorite_border_outlined,
+                            size: 25,
+                            color: Colors.red,
+                          ),
                         )
                       ],
                     ),

@@ -2,6 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:ecommerce/pages/LogIn.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/favorites_counter.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -55,7 +57,7 @@ class HomeAppBar extends StatelessWidget {
                 badgeColor: Colors.red,
                 padding: EdgeInsets.all(7),
                 badgeContent: Text(
-                  "2",
+                  "${context.watch<Counter>().count}",
                   style: TextStyle(color: Colors.white),
                 ),
                 child: Icon(
