@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:ecommerce/pages/Favorites.dart';
 import 'package:flutter/material.dart';
 
 class MeAppBar extends StatelessWidget {
@@ -6,12 +7,18 @@ class MeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.only(top: 45, right: 25, left: 25, bottom: 15),
+      padding: EdgeInsets.only(top: 50, right: 25, left: 25, bottom: 15),
       child: Row(
         children: [
-          Container(
-            margin:
-                EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.35),
+          InkWell(
+            onTap: () {},
+            child: const Icon(
+              Icons.sort,
+              size: 30,
+              color: Color(0xFF4c53a5),
+            ),
+          ),
+          Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
               "Me",
@@ -22,42 +29,23 @@ class MeAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          GestureDetector(
-              onTap: () => {Navigator.pushNamed(context, "/setting")},
-              child: Icon(
-                Icons.settings,
-                color: Color(0xFF4c53a5),
-                size: 30,
-              )),
-          SizedBox(
-            width: 25,
-          ),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              customBorder: CircleBorder(),
-              splashColor: Color(0xFF4c53a5),
-              onTap: () => {
-                Future.delayed(const Duration(milliseconds: 200), () {
-                  Navigator.pushNamed(context, "/cart");
-                })
-                // Navigator.pushNamed(context, "/cart")
-              },
-              child: Badge(
-                toAnimate: false,
-                badgeColor: Colors.red,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text(
-                  "5",
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: Icon(
-                  Icons.shopping_bag_outlined,
-                  color: Color(0xFF4c53a5),
-                  size: 30,
-                ),
-              ),
+          Badge(
+            toAnimate: false,
+            badgeColor: Colors.red,
+            padding: EdgeInsets.all(7),
+            badgeContent: Text(
+              "1",
+              style: TextStyle(color: Colors.white),
             ),
+            child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, "/favorites");
+                },
+                child: Icon(
+                  Icons.settings,
+                  color: Color(0xFF4c53a5),
+                  size: 35,
+                )),
           ),
         ],
       ),

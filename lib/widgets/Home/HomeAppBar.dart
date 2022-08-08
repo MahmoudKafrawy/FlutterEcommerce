@@ -1,5 +1,7 @@
 import 'package:badges/badges.dart';
+import 'package:ecommerce/pages/LogIn.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -10,7 +12,16 @@ class HomeAppBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () => {Navigator.pushNamed(context, "/login")},
+            onTap: () => {
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  duration: Duration(milliseconds: 300),
+                  child: const LogIn(),
+                ),
+              ),
+            },
             child: const Icon(
               Icons.sort,
               size: 30,
@@ -49,36 +60,6 @@ class HomeAppBar extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.favorite_border_outlined,
-                  color: Color(0xFF4c53a5),
-                  size: 30,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 25,
-          ),
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              customBorder: CircleBorder(),
-              splashColor: Color(0xFF4c53a5),
-              onTap: () => {
-                Future.delayed(const Duration(milliseconds: 200), () {
-                  Navigator.pushNamed(context, "/cart");
-                })
-                // Navigator.pushNamed(context, "/cart")
-              },
-              child: Badge(
-                toAnimate: false,
-                badgeColor: Colors.red,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text(
-                  "5",
-                  style: TextStyle(color: Colors.white),
-                ),
-                child: Icon(
-                  Icons.shopping_bag_outlined,
                   color: Color(0xFF4c53a5),
                   size: 30,
                 ),

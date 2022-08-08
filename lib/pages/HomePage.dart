@@ -1,3 +1,5 @@
+import 'package:badges/badges.dart';
+import 'package:ecommerce/pages/Cart.dart';
 import 'package:ecommerce/pages/Categories.dart';
 import 'package:ecommerce/pages/Me.dart';
 import 'package:ecommerce/widgets/Home/CategoriesWidget.dart';
@@ -14,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  final screens = [HomeBody(), Categories(), Me()];
+  final screens = [HomeBody(), Categories(), Me(), Cart()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +27,60 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Color(0xFF4c53a5),
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+              size: 35,
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
+            icon: Icon(
+              Icons.category,
+              size: 35,
+            ),
             label: 'Category',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(
+              Icons.person,
+              size: 35,
+            ),
             label: 'Me',
+          ),
+          BottomNavigationBarItem(
+            icon: Stack(
+              children: <Widget>[
+                Icon(
+                  Icons.shopping_cart_outlined,
+                  size: 35,
+                ),
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    constraints: BoxConstraints(
+                      minWidth: 12,
+                      minHeight: 12,
+                    ),
+                    child: Text(
+                      "5",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 8,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            label: "Cart",
           ),
         ],
       ),

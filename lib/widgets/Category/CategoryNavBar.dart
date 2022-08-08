@@ -47,25 +47,6 @@ class CategoryNavBar extends StatelessWidget {
                   size: 30,
                 )),
           ),
-          SizedBox(
-            width: 25,
-          ),
-          Badge(
-            toAnimate: false,
-            badgeColor: Colors.red,
-            padding: EdgeInsets.all(7),
-            badgeContent: Text(
-              "5",
-              style: TextStyle(color: Colors.white),
-            ),
-            child: InkWell(
-                onTap: () => {Navigator.pushNamed(context, "/cart")},
-                child: Icon(
-                  Icons.shopping_bag_outlined,
-                  color: Color(0xFF4c53a5),
-                  size: 30,
-                )),
-          ),
         ],
       ),
     );
