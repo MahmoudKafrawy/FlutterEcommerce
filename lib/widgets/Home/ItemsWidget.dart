@@ -38,7 +38,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
     return productList.isEmpty
         ? Center(child: CircularProgressIndicator())
         : GridView.count(
-            childAspectRatio: 0.6,
+            childAspectRatio: 0.67,
             physics: NeverScrollableScrollPhysics(),
             // crossAxisSpacing: 2,
             // mainAxisSpacing: 2,
@@ -106,28 +106,32 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         ),
                       ),
                     ),
+                    Spacer(),
                     Container(
-                      padding: EdgeInsets.only(top: 10),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        productList[i].name!,
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF4c53A5)),
-                      ),
-                    ),
+                        padding: EdgeInsets.only(top: 10),
+                        alignment: Alignment.centerLeft,
+                        child: RichText(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            strutStyle: StrutStyle(fontSize: 15.0),
+                            text: TextSpan(
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF4c53a5)),
+                                text: productList[i].name!))),
                     Container(
-                      padding: EdgeInsets.only(top: 5),
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        productList[i].description!,
-                        style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.normal,
-                            color: Color.fromARGB(255, 124, 124, 124)),
-                      ),
-                    ),
+                        padding: EdgeInsets.only(top: 5),
+                        alignment: Alignment.centerLeft,
+                        child: RichText(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            strutStyle: StrutStyle(fontSize: 12.0),
+                            text: TextSpan(
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Color.fromARGB(255, 119, 119, 119)),
+                                text: productList[i].description!))),
                     Expanded(child: Container()),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5),

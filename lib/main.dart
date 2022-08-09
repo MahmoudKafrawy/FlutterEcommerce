@@ -7,6 +7,7 @@ import 'package:ecommerce/pages/LocationPicker.dart';
 import 'package:ecommerce/pages/Me.dart';
 import 'package:ecommerce/pages/Payment.dart';
 import 'package:ecommerce/pages/Product.dart';
+import 'package:ecommerce/pages/Search.dart';
 import 'package:ecommerce/pages/Settings.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         "/setting": (context) => Settings(),
         "/login": (context) => LogIn(),
         "/location": (context) => LocationPicker(),
+        "/search": (context) => Search(),
       },
     );
   }

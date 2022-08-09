@@ -40,7 +40,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               children: [
                 for (int i = 0; i < brandsList.length; i++)
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      margin: EdgeInsets.only(left: 15),
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(

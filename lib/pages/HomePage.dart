@@ -30,21 +30,21 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
+              Icons.home_outlined,
               size: 35,
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.category,
+              Icons.apps_outlined,
               size: 35,
             ),
             label: 'Category',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.person_outline,
               size: 35,
             ),
             label: 'Me',

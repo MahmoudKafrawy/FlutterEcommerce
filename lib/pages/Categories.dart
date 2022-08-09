@@ -9,7 +9,6 @@ class Categories extends StatelessWidget {
     return Scaffold(
       body: Column(children: [
         Container(
-          padding: EdgeInsets.only(top: 15),
           child: CategoryNavBar(),
         ),
         Flexible(

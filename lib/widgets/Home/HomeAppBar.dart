@@ -10,7 +10,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.only(top: 45, right: 25, left: 25, bottom: 15),
+      padding: EdgeInsets.only(top: 40, right: 20, left: 20, bottom: 15),
       child: Row(
         children: [
           InkWell(
@@ -53,7 +53,8 @@ class HomeAppBar extends StatelessWidget {
                 // Navigator.pushNamed(context, "/cart")
               },
               child: Badge(
-                toAnimate: false,
+                animationType: BadgeAnimationType.scale,
+                animationDuration: Duration(milliseconds: 150),
                 badgeColor: Colors.red,
                 padding: EdgeInsets.all(7),
                 badgeContent: Text(

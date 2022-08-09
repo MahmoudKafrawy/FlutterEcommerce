@@ -7,7 +7,7 @@ class CategoryNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.only(top: 30, right: 25, left: 25, bottom: 15),
+      padding: EdgeInsets.only(top: 40, right: 20, left: 20, bottom: 15),
       child: Row(
         children: [
           InkWell(
