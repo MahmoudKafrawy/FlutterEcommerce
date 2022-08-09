@@ -13,6 +13,7 @@ class ItemsWidget extends StatefulWidget {
 }
 
 class _ItemsWidgetState extends State<ItemsWidget> {
+  bool _favFlag = false;
   List<Product> productList = [];
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
@@ -72,10 +73,22 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         Spacer(),
                         InkWell(
                           onTap: (() {
-                            context.read<Counter>().increment();
+                            if (_favFlag == false) {
+                              context.read<Counter>().increment();
+                              setState(() {
+                                _favFlag = true;
+                              });
+                            } else {
+                              context.read<Counter>().decrement();
+                              setState(() {
+                                _favFlag = false;
+                              });
+                            }
                           }),
                           child: Icon(
-                            Icons.favorite_border_outlined,
+                            productList[i].isFavorite!
+                                ? Icons.favorite
+                                : Icons.favorite_border_outlined,
                             size: 25,
                             color: Colors.red,
                           ),

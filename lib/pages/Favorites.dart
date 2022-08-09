@@ -1,6 +1,6 @@
 import 'package:ecommerce/widgets/Favorites/FavoritesAppBar.dart';
 import 'package:flutter/material.dart';
-import '../widgets/Favorites/CartItemSample.dart';
+import '../widgets/Favorites/FavtItemSample.dart';
 import '../widgets/Favorites/FavortiesBottomNavBar.dart';
 
 class Favorites extends StatelessWidget {
@@ -18,7 +18,7 @@ class Favorites extends StatelessWidget {
                   topLeft: Radius.circular(35), topRight: Radius.circular(35))),
           child: Column(
             children: [
-              CartItemSample(),
+              FavtItemSample(),
             ],
           ),
         )
