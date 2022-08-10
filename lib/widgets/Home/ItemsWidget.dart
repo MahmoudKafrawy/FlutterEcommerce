@@ -111,7 +111,16 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                 SnackBar(
                                   content:
                                       Text('This Item was added to Favorites'),
-                                  duration: Duration(seconds: 2),
+                                  duration: Duration(seconds: 1),
+                                  action: SnackBarAction(
+                                    label: 'UNDO',
+                                    onPressed: () {
+                                      setState(() {
+                                        _favFlag = false;
+                                        context.read<Counter>().decrement();
+                                      });
+                                    },
+                                  ),
                                 ),
                               );
                             } else {
@@ -122,8 +131,18 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                      'This Item was removed to Favorites'),
+                                    'This Item was removed from Favorites',
+                                  ),
                                   duration: Duration(seconds: 1),
+                                  action: SnackBarAction(
+                                    label: 'UNDO',
+                                    onPressed: () {
+                                      setState(() {
+                                        _favFlag = true;
+                                        context.read<Counter>().increment();
+                                      });
+                                    },
+                                  ),
                                 ),
                               );
                             }
