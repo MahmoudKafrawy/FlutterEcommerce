@@ -1,3 +1,4 @@
+import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -41,7 +42,7 @@ class _FavtItemSampleState extends State<FavtItemSample> {
   @override
   Widget build(BuildContext context) {
     return favList.length == 0
-        ? CircularProgressIndicator()
+        ? Text("No items in Fav")
         : Column(
             children: [
               for (int i = 0; i < favList.length; i++)

@@ -15,6 +15,8 @@ class ItemsWidget extends StatefulWidget {
 class _ItemsWidgetState extends State<ItemsWidget> {
   bool _favFlag = false;
   List<Product> productList = [];
+  List<Product> favList = [];
+
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
 
@@ -29,9 +31,36 @@ class _ItemsWidgetState extends State<ItemsWidget> {
         for (int i = 0; i < result.length; i++) {
           productItem = Product.fromJsonData(result[i]);
           productList.add(productItem);
+          if (productList[i].isFavorite! == true) {
+            favList.add(productList[i]);
+          }
         }
       });
     }
+    context.read<Counter>().setValue(favList.length);
+  }
+
+  sendFav(id) async {
+    try {
+      var response = await http.post(
+          Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
+          headers: {
+            'Content-Type': "application/x-www-form-urlencoded",
+          },
+          body: {});
+      print(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  renderFav(a) {
+    for (int i = 0; i < productList.length; i++) {
+      if (productList[i].isFavorite! == true) {
+        favList.add(productList[i]);
+      }
+    }
+    context.read<Counter>().setValue(a);
   }
 
   @override
@@ -73,17 +102,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         Spacer(),
                         InkWell(
                           onTap: (() {
-                            if (_favFlag == false) {
-                              context.read<Counter>().increment();
-                              setState(() {
-                                _favFlag = true;
-                              });
-                            } else {
-                              context.read<Counter>().decrement();
-                              setState(() {
-                                _favFlag = false;
-                              });
-                            }
+                            sendFav("${productList[i].id}");
+                            renderFav(favList.length);
                           }),
                           child: Icon(
                             productList[i].isFavorite!
