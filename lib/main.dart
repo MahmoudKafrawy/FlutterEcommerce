@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (context) => HomePage(),
+        "/homepage": (context) => HomePage(),
         "/categories": (context) => Categories(),
         "/me": (context) => Me(),
         "/favorites": (context) => Favorites(),
