@@ -102,8 +102,31 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         Spacer(),
                         InkWell(
                           onTap: (() {
-                            sendFav("${productList[i].id}");
-                            renderFav(favList.length);
+                            if (_favFlag == false) {
+                              context.read<Counter>().increment();
+                              setState(() {
+                                _favFlag = true;
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('This Item was added to Favorites'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            } else {
+                              context.read<Counter>().decrement();
+                              setState(() {
+                                _favFlag = false;
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      'This Item was removed to Favorites'),
+                                  duration: Duration(seconds: 1),
+                                ),
+                              );
+                            }
                           }),
                           child: Icon(
                             productList[i].isFavorite!
