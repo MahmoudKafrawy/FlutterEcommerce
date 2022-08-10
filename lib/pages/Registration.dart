@@ -3,11 +3,10 @@ import 'package:ecommerce/widgets/Me/MeAppBar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
-class LogIn extends StatelessWidget {
-  const LogIn({Key? key}) : super(key: key);
+class Registration extends StatelessWidget {
+  const Registration({Key? key}) : super(key: key);
 
   static const String _title = 'Sample App';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +25,18 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstController = TextEditingController();
+  TextEditingController lastController = TextEditingController();
+  TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController rePasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
   bool isHiddenPass = true;
   final chk = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  var val1;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,10 +46,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: ListView(
             children: <Widget>[
               Container(
+                  margin: EdgeInsets.only(bottom: 20, top: 20),
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(7),
                   child: const Text(
-                    'Log In',
+                    'Registration',
                     style: TextStyle(
                         color: Color(0xFF4C53A5),
                         fontWeight: FontWeight.w500,
@@ -58,9 +62,64 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               //     child: const Text(
               //       'Sign in',
               //       style: TextStyle(fontSize: 20),
-              //     )),
+              //     ))
+
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(7),
+                child: TextFormField(
+                  // autofillHints: [AutofillHints.email],
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "please enter your first name";
+                    }
+                    return null;
+                  },
+                  maxLength: 10,
+                  controller: firstController,
+                  decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF4C53A5), width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF4C53A5), width: 2)),
+                      labelText: 'First Name',
+                      labelStyle: TextStyle(color: Color(0xFF4C53A5))),
+                ),
+              ),
+
+              ////////
+              Container(
+                padding: const EdgeInsets.all(7),
+                child: TextFormField(
+                  // autofillHints: [AutofillHints.email],
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "please enter your Last name";
+                    }
+                    return null;
+                  },
+                  maxLength: 10,
+                  controller: lastController,
+                  decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF4C53A5), width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF4C53A5), width: 2)),
+                      labelText: 'Last Name',
+                      labelStyle: TextStyle(color: Color(0xFF4C53A5))),
+                ),
+              ),
+
+              ///
+              ///
+              ///
+              Container(
+                padding: const EdgeInsets.all(7),
                 child: TextFormField(
                   // autofillHints: [AutofillHints.email],
                   keyboardType: TextInputType.emailAddress,
@@ -73,7 +132,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     return null;
                   },
                   maxLength: 20,
-                  // controller: nameController,
+                  controller: mailController,
                   decoration: const InputDecoration(
                       prefixIcon: Icon(
                         Icons.email,
@@ -90,7 +149,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                margin: EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.all(7),
                 child: TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -98,6 +158,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     } else if (value.length <= 6) {
                       return "Password must be more than 6 fileds";
                     }
+                    val1 = value;
                     return null;
                   },
                   obscureText: isHiddenPass,
@@ -127,6 +188,51 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       labelStyle: TextStyle(color: Color(0xFF4C53A5))),
                 ),
               ),
+              ////
+              ///
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  validator: (value) {
+                    if (val1 != value) {
+                      return "passwords not match";
+                    } else if (value!.isEmpty) {
+                      return "Please re-enter password";
+                    } else if (value.length <= 6) {
+                      return "Password must be more than 6 fileds";
+                    }
+                    return null;
+                  },
+                  obscureText: isHiddenPass,
+                  // controller: rePasswordController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: Color(0xFF4C53A5),
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: (() {
+                          isHiddenPass = !isHiddenPass;
+
+                          setState(() {});
+                        }),
+                        child: Icon(
+                          Icons.visibility,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF4C53A5), width: 2)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF4C53A5), width: 2)),
+                      labelText: 'Re-Enter Password',
+                      labelStyle: TextStyle(color: Color(0xFF4C53A5))),
+                ),
+              ),
+
+              ///
+              ///
               TextButton(
                 onPressed: () {
                   //forgot password screen
@@ -161,10 +267,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(30),
                     onTap: () {
-                      Future.delayed(const Duration(milliseconds: 200), () {
-                        print(nameController.text);
-                        print(passwordController.text);
-                      });
+                      Future.delayed(const Duration(milliseconds: 200), () {});
 
                       if (!_formKey.currentState!.validate()) {
                         return;
@@ -203,8 +306,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       'Sign in',
                       style: TextStyle(fontSize: 20, color: Color(0xFF4C53A5)),
                     ),
-                    onPressed: () =>
-                        Navigator.pushNamed(context, "/registration"),
+                    onPressed: () {
+                      //signup screen
+                    },
                   )
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
