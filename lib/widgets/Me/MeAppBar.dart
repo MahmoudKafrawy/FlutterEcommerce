@@ -7,6 +7,7 @@ class MeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.only(top: 50, right: 25, left: 25, bottom: 15),
       child: Row(
         children: [
@@ -39,7 +40,7 @@ class MeAppBar extends StatelessWidget {
             ),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, "/favorites");
+                  Navigator.pushNamed(context, "/setting");
                 },
                 child: Icon(
                   Icons.settings,

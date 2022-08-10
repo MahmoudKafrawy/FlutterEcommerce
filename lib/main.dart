@@ -7,13 +7,18 @@ import 'package:ecommerce/pages/LocationPicker.dart';
 import 'package:ecommerce/pages/Me.dart';
 import 'package:ecommerce/pages/Payment.dart';
 import 'package:ecommerce/pages/Product.dart';
+import 'package:ecommerce/pages/Registration.dart';
 import 'package:ecommerce/pages/Search.dart';
 import 'package:ecommerce/pages/Settings.dart';
+import 'package:ecommerce/providers/Brands_fetch.dart';
+import 'package:ecommerce/providers/Items_fetch.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/pages/HomePage.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
+import 'package:ecommerce/providers/Items_fetch.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -24,9 +29,20 @@ void main() {
 // For Android (dark icons)
     ),
   );
-  runApp(MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => Counter())],
-      child: MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => Counter(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => CartCounter(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => ItemsFecth(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => BrandsFetch(),
+    )
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -61,6 +77,7 @@ class MyApp extends StatelessWidget {
         "/payment": (context) => Payment(),
         "/setting": (context) => Settings(),
         "/login": (context) => LogIn(),
+        "/registration": (context) => Registration(),
         "/location": (context) => LocationPicker(),
         "/search": (context) => Search(),
       },

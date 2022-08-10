@@ -1,7 +1,7 @@
 class Product {
   String? name;
   int? userId;
-  int? id;
+  String? id;
   String? description;
   String? thumbnail;
   int? price;
@@ -19,7 +19,7 @@ class Product {
   factory Product.fromJsonData(Map<String, dynamic> data) {
     return Product(
         description: data['description'],
-        id: data['id'],
+        id: data['_id'],
         userId: data['userId'],
         name: data['name'],
         thumbnail: data['thumbnail'],

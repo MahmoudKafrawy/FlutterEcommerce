@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
+import 'package:ecommerce/providers/Items_fetch.dart';
 
 class ItemsWidget extends StatefulWidget {
   @override
@@ -13,8 +14,12 @@ class ItemsWidget extends StatefulWidget {
 }
 
 class _ItemsWidgetState extends State<ItemsWidget> {
+  bool fetchFlag = false;
   bool _favFlag = false;
+
   List<Product> productList = [];
+  List<Product> favList = [];
+
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
 
@@ -29,13 +34,42 @@ class _ItemsWidgetState extends State<ItemsWidget> {
         for (int i = 0; i < result.length; i++) {
           productItem = Product.fromJsonData(result[i]);
           productList.add(productItem);
+          if (productList[i].isFavorite! == true) {
+            favList.add(productList[i]);
+          }
         }
+        context.read<ItemsFecth>().setValue(productList);
       });
     }
+    context.read<ItemsFecth>().setValue(favList.length);
+  }
+
+  sendFav(id) async {
+    try {
+      var response = await http.post(
+          Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
+          headers: {
+            'Content-Type': "application/x-www-form-urlencoded",
+          },
+          body: {});
+      print(response.body);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  renderFav(a) {
+    for (int i = 0; i < productList.length; i++) {
+      if (productList[i].isFavorite! == true) {
+        favList.add(productList[i]);
+      }
+    }
+    context.read<Counter>().setValue(a);
   }
 
   @override
   Widget build(BuildContext context) {
+    productList = [...context.watch<ItemsFecth>().count];
     return productList.isEmpty
         ? Center(child: CircularProgressIndicator())
         : GridView.count(
@@ -73,50 +107,54 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         Spacer(),
                         InkWell(
                           onTap: (() {
-                            if (_favFlag == false) {
-                              context.read<Counter>().increment();
-                              setState(() {
-                                _favFlag = true;
-                              });
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content:
-                                      Text('This Item was added to Favorites'),
-                                  duration: Duration(seconds: 1),
-                                  action: SnackBarAction(
-                                    label: 'UNDO',
-                                    onPressed: () {
-                                      setState(() {
-                                        _favFlag = false;
-                                        context.read<Counter>().decrement();
-                                      });
-                                    },
-                                  ),
-                                ),
-                              );
-                            } else {
-                              context.read<Counter>().decrement();
-                              setState(() {
-                                _favFlag = false;
-                              });
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'This Item was removed from Favorites',
-                                  ),
-                                  duration: Duration(seconds: 1),
-                                  action: SnackBarAction(
-                                    label: 'UNDO',
-                                    onPressed: () {
-                                      setState(() {
-                                        _favFlag = true;
-                                        context.read<Counter>().increment();
-                                      });
-                                    },
-                                  ),
-                                ),
-                              );
-                            }
+                            sendFav(productList[i].id);
+                            renderFav(favList.length);
+                            //////////////////////////////////
+                            ///Falaky UI
+                            /////////////////////////////////
+                            // if (_favFlag == false) {
+                            //   context.read<Counter>().increment();
+                            //   setState(() {
+                            //     _favFlag = true;
+                            //   });
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //     SnackBar(
+                            //       content:
+                            //           Text('This Item was added to Favorites'),
+                            //       duration: Duration(seconds: 1),
+                            //       action: SnackBarAction(
+                            //         label: 'UNDO',
+                            //         onPressed: () {
+                            //           setState(() {
+                            //             context.read<Counter>().decrement();
+                            //           });
+                            //         },
+                            //       ),
+                            //     ),
+                            //   );
+                            // } else {
+                            //   context.read<Counter>().decrement();
+                            //   setState(() {
+                            //     _favFlag = false;
+                            //   });
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //     SnackBar(
+                            //       content: Text(
+                            //         'This Item was removed from Favorites',
+                            //       ),
+                            //       duration: Duration(seconds: 1),
+                            //       action: SnackBarAction(
+                            //         label: 'UNDO',
+                            //         onPressed: () {
+                            //           setState(() {
+                            //             _favFlag = true;
+                            //             context.read<Counter>().increment();
+                            //           });
+                            //         },
+                            //       ),
+                            //     ),
+                            //   );
+                            // }
                           }),
                           child: Icon(
                             productList[i].isFavorite!
@@ -207,7 +245,10 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
   @override
   void initState() {
-    super.initState();
-    fetchData();
+    if (fetchFlag == false) {
+      super.initState();
+      fetchData();
+      fetchFlag = true;
+    }
   }
 }
