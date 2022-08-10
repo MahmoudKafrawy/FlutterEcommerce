@@ -8,6 +8,8 @@ import 'package:ecommerce/widgets/Home/HomeAppBar.dart';
 import 'package:ecommerce/widgets/Home/ItemsWidget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -69,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                       minHeight: 15,
                     ),
                     child: Text(
-                      "5",
+                      "${context.watch<CartCounter>().count}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,

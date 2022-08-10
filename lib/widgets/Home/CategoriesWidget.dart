@@ -1,7 +1,10 @@
+import 'package:ecommerce/providers/Brands_fetch.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/model/Brands.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Brands_fetch.dart';
 
 class CategoriesWidget extends StatefulWidget {
   @override
@@ -9,6 +12,8 @@ class CategoriesWidget extends StatefulWidget {
 }
 
 class _CategoriesWidgetState extends State<CategoriesWidget> {
+  bool fetchFlag = false;
+
   List<Brands> brandsList = [];
   late Brands brandsItem;
   Uri url =
@@ -27,11 +32,14 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
           brandsList.add(brandsItem);
         }
       });
+      context.read<BrandsFetch>().setValue(brandsList);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    brandsList = [...context.watch<BrandsFetch>().count];
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: brandsList.isEmpty
@@ -68,6 +76,10 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchData();
+    if (fetchFlag == false) {
+      super.initState();
+      fetchData();
+      fetchFlag = true;
+    }
   }
 }

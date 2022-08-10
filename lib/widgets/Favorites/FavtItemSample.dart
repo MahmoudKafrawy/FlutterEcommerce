@@ -42,7 +42,7 @@ class _FavtItemSampleState extends State<FavtItemSample> {
   @override
   Widget build(BuildContext context) {
     return favList.length == 0
-        ? Text("No items in Fav")
+        ? Center(child: CircularProgressIndicator())
         : Column(
             children: [
               for (int i = 0; i < favList.length; i++)
