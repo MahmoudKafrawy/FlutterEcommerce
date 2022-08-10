@@ -7,6 +7,16 @@ class Counter with ChangeNotifier {
 
   int get count => _count;
 
+  void increment() {
+    _count++;
+    notifyListeners();
+  }
+
+  void decrement() {
+    _count--;
+    notifyListeners();
+  }
+
   void setValue(a) {
     _count = a;
     notifyListeners();
