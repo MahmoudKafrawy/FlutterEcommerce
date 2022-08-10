@@ -2,8 +2,39 @@ import 'package:ecommerce/widgets/Category/CategoryNavBar.dart';
 import 'package:ecommerce/widgets/Category/CategoryGrid.dart';
 import 'package:ecommerce/widgets/SearchWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:ecommerce/model/Categories.dart';
 
-class Categories extends StatelessWidget {
+class Categories extends StatefulWidget {
+  @override
+  State<Categories> createState() => _CategoriesState();
+}
+
+class _CategoriesState extends State<Categories> {
+  List<CategoriesList> categoryList = [];
+  List<CategoriesList> fetchedList = [];
+
+  late CategoriesList categoryItem;
+  Uri url =
+      Uri.parse("https://flutter-api-three.vercel.app/api/products/categories");
+
+  fetchData() async {
+    //Response   X= Future<Response>
+    http.Response response = await http.get(url);
+    List result = [];
+    if (response.statusCode == 200) {
+      result = jsonDecode(response.body);
+
+      setState(() {
+        for (int i = 0; i < result.length; i++) {
+          categoryItem = CategoriesList.fromJsonData(result[i]);
+          categoryList.add(categoryItem);
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,27 +66,26 @@ class Categories extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        width: MediaQuery.of(context).size.width * 0.18,
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        width: MediaQuery.of(context).size.width * 0.20,
                         height: MediaQuery.of(context).size.height * 0.7,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20))),
+                            borderRadius: BorderRadius.only()),
                         child: SingleChildScrollView(
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              for (int i = 1; i < 10; i++)
+                              for (int i = 1; i < categoryList.length; i++)
                                 TextButton(
                                   style: TextButton.styleFrom(
                                     textStyle: const TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 10,
                                     ),
                                   ),
                                   onPressed: () {},
-                                  child: const Text(
-                                    'Disabled',
+                                  child: Text(
+                                    categoryList[i].name!,
                                     style: TextStyle(
                                         color: Color(0xFF4c53a5),
                                         fontWeight: FontWeight.bold),
@@ -81,5 +111,12 @@ class Categories extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchData();
   }
 }

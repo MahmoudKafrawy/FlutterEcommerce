@@ -17,12 +17,16 @@ class SearchWidget extends StatelessWidget {
         children: [
           //search
           Flexible(
-            child: Container(
-              margin: EdgeInsets.only(left: 5),
-              height: 50,
-              child: TextFormField(
-                decoration: const InputDecoration(
-                    border: InputBorder.none, hintText: "Search..."),
+            child: InkWell(
+              onTap: () => {Navigator.pushNamed(context, "/search")},
+              child: Container(
+                margin: EdgeInsets.only(left: 5),
+                height: 50,
+                child: TextFormField(
+                  enabled: false,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, hintText: "Search..."),
+                ),
               ),
             ),
           ),

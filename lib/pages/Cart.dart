@@ -16,7 +16,6 @@ class Cart extends StatelessWidget {
             context: context,
             child: ListView(children: [
               Container(
-                height: 700,
                 padding: EdgeInsets.only(top: 15),
                 decoration: BoxDecoration(
                     color: Color(0xFFEDECF2),

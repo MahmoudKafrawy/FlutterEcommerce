@@ -1,8 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class CartItemSample extends StatelessWidget {
+import '../../model/Product.dart';
+
+class CartItemSample extends StatefulWidget {
   const CartItemSample({Key? key}) : super(key: key);
+
+  @override
+  State<CartItemSample> createState() => _CartItemSampleState();
+}
+
+class _CartItemSampleState extends State<CartItemSample> {
+  List<Product> productList = [];
+  List<Product> favList = [];
+  late Product productItem;
+  Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
+
+  fetchData() async {
+    //Response   X= Future<Response>
+    http.Response response = await http.get(url);
+    List result = [];
+    if (response.statusCode == 200) {
+      result = jsonDecode(response.body);
+
+      setState(() {
+        for (int i = 0; i < result.length; i++) {
+          productItem = Product.fromJsonData(result[i]);
+          productList.add(productItem);
+
+          if (productList[i].isFavorite! == true) {
+            favList.add(productList[i]);
+          }
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
