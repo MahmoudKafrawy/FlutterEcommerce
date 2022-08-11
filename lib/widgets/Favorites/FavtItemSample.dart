@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/favorites_counter.dart';
 import '../../model/Product.dart';
 
 class FavtItemSample extends StatefulWidget {
@@ -36,6 +37,27 @@ class _FavtItemSampleState extends State<FavtItemSample> {
           }
         }
       });
+    }
+  }
+
+  sendFav(id) async {
+    try {
+      var response = await http.post(
+          Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
+          headers: {
+            'Content-Type': "application/x-www-form-urlencoded",
+          },
+          body: {}).then((value) {
+        print("${jsonDecode(value.body)['updatedProduct']['isFavorite']}");
+
+        if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
+          context.read<Counter>().increment();
+        } else {
+          context.read<Counter>().decrement();
+        }
+      });
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -98,10 +120,16 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                Icons.delete_outline_outlined,
-                                size: 35,
-                                color: Color(0xFF4C53A5),
+                              InkWell(
+                                onTap: () {
+                                  sendFav(favList[i].id);
+                                  context.read<Counter>().refresh();
+                                },
+                                child: Icon(
+                                  Icons.delete_outline_outlined,
+                                  size: 35,
+                                  color: Color(0xFF4C53A5),
+                                ),
                               )
                             ]),
                       )
