@@ -3,22 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class Counter with ChangeNotifier {
-  int _count = 0;
+  List _count = [];
 
-  int get count => _count;
-
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
-
-  void decrement() {
-    _count--;
-    notifyListeners();
-  }
+  List get count => [..._count];
 
   void setValue(a) {
-    _count = a;
+    _count = [...a];
     notifyListeners();
   }
 }

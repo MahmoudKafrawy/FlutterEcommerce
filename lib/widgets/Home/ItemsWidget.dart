@@ -58,7 +58,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
     }
   }
 
-  renderFav(a) {
+  renderFav() {
     for (int i = 0; i < productList.length; i++) {
       if (productList[i].isFavorite! == true) {
         //
@@ -104,7 +104,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
       //   );
       // }
     }
-    context.read<Counter>().setValue(a);
+    context.read<Counter>().setValue(favList);
   }
 
   @override
@@ -148,7 +148,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         InkWell(
                           onTap: (() {
                             sendFav(productList[i].id);
-                            renderFav(favList.length);
+                            renderFav();
                             //////////////////////////////////
                             ///Falaky UI
                             /////////////////////////////////

@@ -58,7 +58,7 @@ class HomeAppBar extends StatelessWidget {
                 badgeColor: Colors.red,
                 padding: EdgeInsets.all(7),
                 badgeContent: Text(
-                  "${context.watch<Counter>().count}",
+                  "${context.watch<Counter>().count.length}",
                   style: TextStyle(color: Colors.white),
                 ),
                 child: Icon(
