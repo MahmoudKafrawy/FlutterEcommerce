@@ -216,7 +216,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                 arguments: {
                                   "name": productList[i].name,
                                   "thumbnail": productList[i].thumbnail,
-                                  "description": productList[i].description
+                                  "description": productList[i].description,
+                                  "price": productList[i].price
                                 });
                           })
                         },

@@ -181,9 +181,51 @@ class Product extends StatelessWidget {
                         ]),
                   )
               ],
-            )
+            ),
           ],
         ),
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Price",
+                style: TextStyle(
+                    color: Color(0xFF4C53A5),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "\$${arguments['price']}",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF4C53A5)),
+              )
+            ],
+          ),
+          Container(
+            alignment: Alignment.center,
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Color(0xFF4C53A5),
+                borderRadius: BorderRadius.circular(20)),
+            child: InkWell(
+              onTap: () => {Navigator.pushNamed(context, "/payment")},
+              child: Text(
+                "Check out",
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ),
+          )
+        ],
       ),
     ]));
   }
