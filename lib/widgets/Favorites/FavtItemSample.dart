@@ -121,8 +121,9 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                onTap: () {
-                                  sendFav(favList[i].id);
+                                onTap: () async {
+                                  await sendFav(favList[i].id)
+                                      .then(setState(() {}));
                                 },
                                 child: Icon(
                                   Icons.delete_outline_outlined,
