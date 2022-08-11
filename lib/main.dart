@@ -2,6 +2,7 @@ import 'package:ecommerce/pages/Cart.dart';
 import 'package:ecommerce/pages/Categories.dart';
 import 'package:ecommerce/pages/CheckOut.dart';
 import 'package:ecommerce/pages/Favorites.dart';
+import 'package:ecommerce/pages/IntroScreens.dart';
 import 'package:ecommerce/pages/LogIn.dart';
 import 'package:ecommerce/pages/LocationPicker.dart';
 import 'package:ecommerce/pages/Me.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
         // ),
       ),
       routes: {
-        "/": (context) => HomePage(),
+        "/": (context) => OnBoardingPage(),
         "/homepage": (context) => HomePage(),
         "/categories": (context) => Categories(),
         "/me": (context) => Me(),

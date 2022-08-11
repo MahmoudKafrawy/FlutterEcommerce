@@ -61,8 +61,48 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   renderFav(a) {
     for (int i = 0; i < productList.length; i++) {
       if (productList[i].isFavorite! == true) {
+        //
+        // setState(() {
+        //   context.read<Counter>().decrement();
+        // });
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     content: Text(
+        //       'This Item was removed from Favorites',
+        //     ),
+        //     duration: Duration(seconds: 1),
+        //     action: SnackBarAction(
+        //       label: 'UNDO',
+        //       onPressed: () {
+        //         setState(() {
+        //           context.read<Counter>().increment();
+        //         });
+        //       },
+        //     ),
+        //   ),
+        // );
+        //
         favList.add(productList[i]);
       }
+      // else {
+      //   setState(() {
+      //     context.read<Counter>().increment();
+      //   });
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //       content: Text('This Item was added to Favorites'),
+      //       duration: Duration(seconds: 1),
+      //       action: SnackBarAction(
+      //         label: 'UNDO',
+      //         onPressed: () {
+      //           setState(() {
+      //             context.read<Counter>().decrement();
+      //           });
+      //         },
+      //       ),
+      //     ),
+      //   );
+      // }
     }
     context.read<Counter>().setValue(a);
   }
@@ -112,10 +152,9 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                             //////////////////////////////////
                             ///Falaky UI
                             /////////////////////////////////
-                            // if (_favFlag == false) {
-                            //   context.read<Counter>().increment();
+                            // if (productList[i].isFavorite = false) {
                             //   setState(() {
-                            //     _favFlag = true;
+                            //     context.read<Counter>().increment();
                             //   });
                             //   ScaffoldMessenger.of(context).showSnackBar(
                             //     SnackBar(
@@ -133,9 +172,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                             //     ),
                             //   );
                             // } else {
-                            //   context.read<Counter>().decrement();
                             //   setState(() {
-                            //     _favFlag = false;
+                            //     context.read<Counter>().decrement();
                             //   });
                             //   ScaffoldMessenger.of(context).showSnackBar(
                             //     SnackBar(
@@ -147,7 +185,6 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                             //         label: 'UNDO',
                             //         onPressed: () {
                             //           setState(() {
-                            //             _favFlag = true;
                             //             context.read<Counter>().increment();
                             //           });
                             //         },
@@ -155,6 +192,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                             //     ),
                             //   );
                             // }
+                            // sendFav(productList[i].id);
+                            // renderFav(favList.length);
                           }),
                           child: Icon(
                             productList[i].isFavorite!

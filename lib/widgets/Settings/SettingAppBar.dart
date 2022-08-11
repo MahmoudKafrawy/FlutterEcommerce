@@ -7,6 +7,7 @@ class SettingAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      margin: EdgeInsets.only(top: 30),
       padding: const EdgeInsets.all(10),
       child: Row(
         children: [
