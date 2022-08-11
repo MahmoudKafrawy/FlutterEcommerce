@@ -20,8 +20,13 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/Cart_counter.dart';
 import 'package:ecommerce/providers/Items_fetch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final showHome = prefs.getBool('showHome') ?? false;
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.white,
@@ -30,23 +35,34 @@ void main() {
 // For Android (dark icons)
     ),
   );
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => Counter(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => CartCounter(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => ItemsFecth(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => BrandsFetch(),
-    )
-  ], child: MyApp()));
+  runApp(
+    MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => Counter(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CartCounter(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ItemsFecth(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => BrandsFetch(),
+          )
+        ],
+        child: MyApp(
+          showHome: showHome,
+        )),
+  );
 }
 
 class MyApp extends StatelessWidget {
+  final bool showHome;
+  MyApp({required this.showHome});
+  //
+
+  //
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -67,7 +83,7 @@ class MyApp extends StatelessWidget {
         // ),
       ),
       routes: {
-        "/": (context) => OnBoardingPage(),
+        "/": (context) => showHome ? HomePage() : OnBoardingPage(),
         "/homepage": (context) => HomePage(),
         "/categories": (context) => Categories(),
         "/me": (context) => Me(),

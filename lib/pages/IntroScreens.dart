@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -63,13 +64,16 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         width: double.infinity,
         height: 60,
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Color(0xFF4c53a5)),
-          child: const Text(
-            'Let\'s go right away!',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-          onPressed: () => _onIntroEnd(context),
-        ),
+            style: ElevatedButton.styleFrom(primary: Color(0xFF4c53a5)),
+            child: const Text(
+              'Let\'s go right away!',
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+            ),
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setBool('showHome', true);
+              _onIntroEnd(context);
+            }),
       ),
       pages: [
         PageViewModel(
