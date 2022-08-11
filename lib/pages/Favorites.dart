@@ -17,17 +17,27 @@ class Favorites extends StatelessWidget {
             removeTop: true,
             context: context,
             child: ListView(children: [
-              Container(
-                padding: EdgeInsets.only(top: 15),
-                decoration: BoxDecoration(
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: 650,
+                ),
+                child: Container(
+                  padding: EdgeInsets.only(top: 5),
+                  decoration: BoxDecoration(
                     color: Color(0xFFEDECF2),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(35),
-                        topRight: Radius.circular(35))),
-                child: Column(
-                  children: [
-                    FavtItemSample(),
-                  ],
+                      topLeft: Radius.circular(35),
+                      topRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FavtItemSample(),
+                    ],
+                  ),
                 ),
               ),
             ]),
