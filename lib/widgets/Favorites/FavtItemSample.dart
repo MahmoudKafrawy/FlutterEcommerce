@@ -51,10 +51,14 @@ class _FavtItemSampleState extends State<FavtItemSample> {
         print("${jsonDecode(value.body)['updatedProduct']['isFavorite']}");
 
         if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
-          context.read<Counter>().increment();
+          // context.read<Counter>().increment();
+          // Provider.of<Counter>(context, listen: false).increment();
         } else {
-          context.read<Counter>().decrement();
+          // context.read<Counter>().decrement();
+          Provider.of<Counter>(context, listen: false).decrement();
+          setState(() {});
         }
+        print(context.read<Counter>().count);
       });
     } catch (e) {
       print(e);
@@ -63,11 +67,11 @@ class _FavtItemSampleState extends State<FavtItemSample> {
 
   @override
   Widget build(BuildContext context) {
-    return context.watch<Counter>().count == 0
+    return context.read<Counter>().count == 0
         ? Center(child: Text("Please Add Items"))
         : Column(
             children: [
-              for (int i = 0; i < context.watch<Counter>().count; i++)
+              for (int i = 0; i < context.read<Counter>().count; i++)
                 Container(
                   height: 110,
                   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -121,9 +125,8 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
-                                onTap: () async {
-                                  await sendFav(favList[i].id)
-                                      .then(setState(() {}));
+                                onTap: () {
+                                  sendFav(favList[i].id);
                                 },
                                 child: Icon(
                                   Icons.delete_outline_outlined,
