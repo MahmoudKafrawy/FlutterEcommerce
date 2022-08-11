@@ -63,11 +63,11 @@ class _FavtItemSampleState extends State<FavtItemSample> {
 
   @override
   Widget build(BuildContext context) {
-    return favList.length == 0
-        ? Center(child: CircularProgressIndicator())
+    return context.watch<Counter>().count == 0
+        ? Center(child: Text("Please Add Items"))
         : Column(
             children: [
-              for (int i = 0; i < favList.length; i++)
+              for (int i = 0; i < context.watch<Counter>().count; i++)
                 Container(
                   height: 110,
                   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -123,7 +123,6 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                               InkWell(
                                 onTap: () {
                                   sendFav(favList[i].id);
-                                  context.read<Counter>().refresh();
                                 },
                                 child: Icon(
                                   Icons.delete_outline_outlined,
