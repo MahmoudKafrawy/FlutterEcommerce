@@ -30,7 +30,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
             },
             child: const Icon(
-              Icons.sort,
+              Icons.login_outlined,
               size: 30,
               color: Color(0xFF4c53a5),
             ),

@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:ecommerce/providers/Items_fetch.dart';
+import 'package:ecommerce/model/Favorite.dart';
 
 class ItemsWidget extends StatefulWidget {
   @override
@@ -14,6 +15,16 @@ class ItemsWidget extends StatefulWidget {
 }
 
 class _ItemsWidgetState extends State<ItemsWidget> {
+  Icon favChktrue = Icon(
+    Icons.favorite,
+    size: 25,
+    color: Colors.red,
+  );
+  Icon favChkfalse = Icon(
+    Icons.favorite_border_outlined,
+    size: 25,
+    color: Colors.red,
+  );
   bool fetchFlag = false;
   bool _favFlag = false;
 
@@ -42,10 +53,9 @@ class _ItemsWidgetState extends State<ItemsWidget> {
         context.read<Counter>().setValue(favList.length);
       });
     }
-    context.read<ItemsFecth>().setValue(favList.length);
   }
 
-  sendFav(id) async {
+  sendFav(id, productFav) async {
     try {
       var response = await http.post(
           Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
@@ -53,13 +63,14 @@ class _ItemsWidgetState extends State<ItemsWidget> {
             'Content-Type': "application/x-www-form-urlencoded",
           },
           body: {}).then((value) {
-        print(json.decode(value.body));
+        print("${jsonDecode(value.body)['updatedProduct']['isFavorite']}");
 
-        if (json.decode(value.body).isFavorite == true) {
+        if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
           context.read<Counter>().increment();
         } else {
           context.read<Counter>().decrement();
         }
+        print(productFav);
       });
     } catch (e) {
       print(e);
@@ -154,62 +165,61 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         ),
                         Spacer(),
                         InkWell(
-                          onTap: (() {
-                            sendFav(productList[i].id);
-                            //////////////////////////////////
-                            ///Falaky UI
-                            /////////////////////////////////
-                            // if (productList[i].isFavorite = false) {
-                            //   setState(() {
-                            //     context.read<Counter>().increment();
-                            //   });
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content:
-                            //           Text('This Item was added to Favorites'),
-                            //       duration: Duration(seconds: 1),
-                            //       action: SnackBarAction(
-                            //         label: 'UNDO',
-                            //         onPressed: () {
-                            //           setState(() {
-                            //             context.read<Counter>().decrement();
-                            //           });
-                            //         },
-                            //       ),
-                            //     ),
-                            //   );
-                            // } else {
-                            //   setState(() {
-                            //     context.read<Counter>().decrement();
-                            //   });
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content: Text(
-                            //         'This Item was removed from Favorites',
-                            //       ),
-                            //       duration: Duration(seconds: 1),
-                            //       action: SnackBarAction(
-                            //         label: 'UNDO',
-                            //         onPressed: () {
-                            //           setState(() {
-                            //             context.read<Counter>().increment();
-                            //           });
-                            //         },
-                            //       ),
-                            //     ),
-                            //   );
-                            // }
-                            // sendFav(productList[i].id);
-                            // renderFav(favList.length);
-                          }),
-                          child: Icon(
-                            productList[i].isFavorite!
-                                ? Icons.favorite
-                                : Icons.favorite_border_outlined,
-                            size: 25,
-                            color: Colors.red,
-                          ),
-                        )
+                            onTap: (() {
+                              sendFav(productList[i].id, i);
+                              //////////////////////////////////
+                              ///Falaky UI
+                              /////////////////////////////////
+                              // if (productList[i].isFavorite = false) {
+                              //   setState(() {
+                              //     context.read<Counter>().increment();
+                              //   });
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //     SnackBar(
+                              //       content:
+                              //           Text('This Item was added to Favorites'),
+                              //       duration: Duration(seconds: 1),
+                              //       action: SnackBarAction(
+                              //         label: 'UNDO',
+                              //         onPressed: () {
+                              //           setState(() {
+                              //             context.read<Counter>().decrement();
+                              //           });
+                              //         },
+                              //       ),
+                              //     ),
+                              //   );
+                              // } else {
+                              //   setState(() {
+                              //     context.read<Counter>().decrement();
+                              //   });
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //     SnackBar(
+                              //       content: Text(
+                              //         'This Item was removed from Favorites',
+                              //       ),
+                              //       duration: Duration(seconds: 1),
+                              //       action: SnackBarAction(
+                              //         label: 'UNDO',
+                              //         onPressed: () {
+                              //           setState(() {
+                              //             context.read<Counter>().increment();
+                              //           });
+                              //         },
+                              //       ),
+                              //     ),
+                              //   );
+                              // }
+                              // sendFav(productList[i].id);
+                              // renderFav(favList.length);
+                            }),
+                            child: productList[i].isFavorite == true
+                                ? FavItemsChk()
+                                : Icon(
+                                    Icons.favorite_outline,
+                                    size: 25,
+                                    color: Colors.red,
+                                  ))
                       ],
                     ),
                     Material(
@@ -298,5 +308,20 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
       fetchFlag = true;
     }
+  }
+}
+
+class FavItemsChk extends StatelessWidget {
+  const FavItemsChk({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      Icons.favorite,
+      size: 25,
+      color: Colors.red,
+    );
   }
 }
