@@ -39,6 +39,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
           }
         }
         context.read<ItemsFecth>().setValue(productList);
+        context.read<Counter>().setValue(favList.length);
       });
     }
     context.read<ItemsFecth>().setValue(favList.length);
@@ -104,7 +105,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
       //   );
       // }
     }
-    context.read<Counter>().setValue(favList);
+    context.read<Counter>().setValue(favList.length);
   }
 
   @override
@@ -148,7 +149,6 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         InkWell(
                           onTap: (() {
                             sendFav(productList[i].id);
-                            renderFav();
                             //////////////////////////////////
                             ///Falaky UI
                             /////////////////////////////////
@@ -288,6 +288,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
     if (fetchFlag == false) {
       super.initState();
       fetchData();
+
       fetchFlag = true;
     }
   }

@@ -5,7 +5,12 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatefulWidget {
+  @override
+  State<HomeAppBar> createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +63,7 @@ class HomeAppBar extends StatelessWidget {
                 badgeColor: Colors.red,
                 padding: EdgeInsets.all(7),
                 badgeContent: Text(
-                  "${context.watch<Counter>().count.length}",
+                  "${context.watch<Counter>().count}",
                   style: TextStyle(color: Colors.white),
                 ),
                 child: Icon(
