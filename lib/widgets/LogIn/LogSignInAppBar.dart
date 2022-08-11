@@ -24,7 +24,7 @@ class LogSignInAppBar extends StatelessWidget {
                 EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.25),
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              "Log in",
+              "",
               style: TextStyle(
                   fontSize: 23,
                   color: Color(0xFF4c53a5),

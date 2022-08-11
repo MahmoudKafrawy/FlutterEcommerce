@@ -33,7 +33,7 @@ class HomeAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
-              "Shop",
+              "Mega Shop",
               style: TextStyle(
                   fontSize: 23,
                   color: Color(0xFF4c53a5),
