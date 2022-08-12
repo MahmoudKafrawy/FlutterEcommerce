@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:ecommerce/providers/Items_fetch.dart';
 import 'package:ecommerce/model/Favorite.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
 
 class ItemsWidget extends StatefulWidget {
   @override
@@ -79,6 +80,11 @@ class _ItemsWidgetState extends State<ItemsWidget> {
       print(e);
     }
     setState(() {});
+  }
+
+  sendCart(id) {
+    context.read<CartCounter>().addToCartPage(id);
+    print(id);
   }
 
   // renderFav() {
@@ -173,9 +179,9 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         InkWell(
                             onTap: (() {
                               sendFav(productList[i].id, i);
-                              setState(() {
-                                productList = [];
-                              });
+                              // setState(() {
+                              //   productList = [];
+                              // });
                               //////////////////////////////////
                               ///Falaky UI
                               /////////////////////////////////
@@ -248,7 +254,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                   "name": productList[i].name,
                                   "thumbnail": productList[i].thumbnail,
                                   "description": productList[i].description,
-                                  "price": productList[i].price
+                                  "price": productList[i].price,
+                                  "fav": productList[i].isFavorite
                                 });
                           })
                         },
@@ -300,10 +307,15 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                 color: Color(0xFF4c53A5),
                                 fontWeight: FontWeight.bold),
                           ),
-                          Icon(
-                            Icons.add_shopping_cart_sharp,
-                            size: 25,
-                            color: Color(0xFF4c53A5),
+                          InkWell(
+                            onTap: () {
+                              sendCart(productList[i].id);
+                            },
+                            child: Icon(
+                              Icons.add_shopping_cart_sharp,
+                              size: 25,
+                              color: Color(0xFF4c53A5),
+                            ),
                           )
                         ],
                       ),

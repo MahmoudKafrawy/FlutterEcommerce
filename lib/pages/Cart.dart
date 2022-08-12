@@ -15,44 +15,22 @@ class Cart extends StatelessWidget {
             removeTop: true,
             context: context,
             child: ListView(children: [
-              Container(
-                padding: EdgeInsets.only(top: 15),
-                decoration: BoxDecoration(
-                    color: Color(0xFFEDECF2),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(35),
-                        topRight: Radius.circular(35))),
-                child: Column(
-                  children: [
-                    CartItemSample(),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Color(0xFF4C53A5),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Add Coupon Code",
-                                style: TextStyle(
-                                    color: Color(0xFF4C53A5),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              ))
-                        ],
-                      ),
-                    )
-                  ],
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: 650,
+                ),
+                child: Container(
+                  padding: EdgeInsets.only(top: 15),
+                  decoration: BoxDecoration(
+                      color: Color(0xFFEDECF2),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(35),
+                          topRight: Radius.circular(35))),
+                  child: Column(
+                    children: [
+                      CartItemSample(),
+                    ],
+                  ),
                 ),
               )
             ]),

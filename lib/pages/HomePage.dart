@@ -17,10 +17,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List isinCart = [];
   int currentIndex = 0;
   final screens = [HomeBody(), Categories(), Me(), Cart()];
   @override
   Widget build(BuildContext context) {
+    List isinCart = [...context.watch<CartCounter>().isinCart];
+
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -53,33 +56,22 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Stack(
-              children: <Widget>[
-                Icon(
-                  Icons.shopping_cart_outlined,
-                  size: 35,
-                ),
-                Positioned(
-                  right: 0,
-                  child: Container(
-                    padding: EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 20,
-                      minHeight: 15,
-                    ),
-                    child: Text(
-                      "${context.watch<CartCounter>().count}",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+              children: [
+                Badge(
+                  animationType: BadgeAnimationType.scale,
+                  animationDuration: Duration(milliseconds: 150),
+                  badgeColor: Colors.red,
+                  padding: EdgeInsets.all(7),
+                  badgeContent: Text(
+                    "${isinCart.length}",
+                    style: TextStyle(color: Colors.white),
                   ),
-                )
+                  child: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Color(0xFF4c53a5),
+                    size: 30,
+                  ),
+                ),
               ],
             ),
             label: "Cart",

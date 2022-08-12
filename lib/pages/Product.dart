@@ -19,7 +19,48 @@ class Product extends StatelessWidget {
         body: Column(children: [
       Container(
         padding: EdgeInsets.only(top: 15),
-        child: productAppBar(),
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.only(top: 40, right: 20, left: 20, bottom: 0),
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () => {Navigator.pop(context)},
+                child: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: Color(0xFF4c53a5),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Prdouct",
+                  style: TextStyle(
+                      fontSize: 23,
+                      color: Color(0xFF4c53a5),
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Spacer(),
+              SizedBox(
+                width: 25,
+              ),
+              InkWell(
+                onTap: () => {Navigator.pushNamed(context, "/favorite")},
+                child: arguments['fav'] == true
+                    ? Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : Icon(
+                        Icons.favorite_outline_outlined,
+                        color: Colors.red,
+                      ),
+              ),
+            ],
+          ),
+        ),
       ),
       Padding(
         padding: EdgeInsets.all(16),
@@ -113,119 +154,123 @@ class Product extends StatelessWidget {
           style: TextStyle(fontSize: 12, color: Color(0xFF4c53a5)),
         ),
       ),
+      // Padding(
+      //   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+      //   child: Row(
+      //     children: [
+      //       Text(
+      //         "Size :",
+      //         style: TextStyle(
+      //             fontWeight: FontWeight.bold,
+      //             color: Color(0xFF4c53a5),
+      //             fontSize: 15),
+      //       ),
+      //       SizedBox(
+      //         width: 20,
+      //       ),
+      //       Row(
+      //         children: [
+      //           for (int i = 1; i < 6; i++)
+      //             Container(
+      //                 padding: EdgeInsets.all(4),
+      //                 margin: EdgeInsets.symmetric(horizontal: 10),
+      //                 decoration: BoxDecoration(
+      //                     color: Colors.white,
+      //                     borderRadius: BorderRadius.circular(20),
+      //                     boxShadow: [
+      //                       BoxShadow(
+      //                           color: Colors.grey.withOpacity(0.5),
+      //                           spreadRadius: 1,
+      //                           blurRadius: 10),
+      //                     ]),
+      //                 child: Text("$i"))
+      //         ],
+      //       )
+      //     ],
+      //   ),
+      // // ),
+      // Padding(
+      //   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+      //   child: Row(
+      //     children: [
+      //       Text(
+      //         "Colors :",
+      //         style: TextStyle(
+      //             fontWeight: FontWeight.bold,
+      //             color: Color(0xFF4c53a5),
+      //             fontSize: 15),
+      //       ),
+      //       SizedBox(
+      //         width: 20,
+      //       ),
+      //       Row(
+      //         children: [
+      //           for (int i = 0; i < 5; i++)
+      //             Container(
+      //               width: 20,
+      //               height: 20,
+      //               padding: EdgeInsets.all(4),
+      //               margin: EdgeInsets.symmetric(horizontal: 10),
+      //               decoration: BoxDecoration(
+      //                   color: clrs[i],
+      //                   borderRadius: BorderRadius.circular(20),
+      //                   boxShadow: [
+      //                     BoxShadow(
+      //                         color: Colors.grey.withOpacity(0.5),
+      //                         spreadRadius: 1,
+      //                         blurRadius: 10),
+      //                   ]),
+      //             )
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      Expanded(child: Container()),
       Padding(
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-        child: Row(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Size :",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4c53a5),
-                  fontSize: 15),
-            ),
-            SizedBox(
-              width: 20,
-            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                for (int i = 1; i < 6; i++)
-                  Container(
-                      padding: EdgeInsets.all(4),
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 10),
-                          ]),
-                      child: Text("$i"))
+                Text(
+                  "Price",
+                  style: TextStyle(
+                      color: Color(0xFF4C53A5),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "\$${arguments['price']}",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4C53A5)),
+                )
               ],
+            ),
+            Container(
+              alignment: Alignment.center,
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Color(0xFF4C53A5),
+                  borderRadius: BorderRadius.circular(20)),
+              child: InkWell(
+                onTap: () => {Navigator.pushNamed(context, "/payment")},
+                child: Text(
+                  "Add to cart",
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
             )
           ],
         ),
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-        child: Row(
-          children: [
-            Text(
-              "Colors :",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4c53a5),
-                  fontSize: 15),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Row(
-              children: [
-                for (int i = 0; i < 5; i++)
-                  Container(
-                    width: 20,
-                    height: 20,
-                    padding: EdgeInsets.all(4),
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: clrs[i],
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 10),
-                        ]),
-                  )
-              ],
-            ),
-          ],
-        ),
-      ),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Price",
-                style: TextStyle(
-                    color: Color(0xFF4C53A5),
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "\$${arguments['price']}",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF4C53A5)),
-              )
-            ],
-          ),
-          Container(
-            alignment: Alignment.center,
-            height: 50,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: Color(0xFF4C53A5),
-                borderRadius: BorderRadius.circular(20)),
-            child: InkWell(
-              onTap: () => {Navigator.pushNamed(context, "/payment")},
-              child: Text(
-                "Check out",
-                style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ),
-          )
-        ],
       ),
     ]));
   }
