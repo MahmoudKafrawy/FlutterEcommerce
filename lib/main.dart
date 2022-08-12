@@ -10,6 +10,7 @@ import 'package:ecommerce/pages/Payment.dart';
 import 'package:ecommerce/pages/Product.dart';
 import 'package:ecommerce/pages/Products.dart';
 import 'package:ecommerce/pages/Registration.dart';
+import 'package:ecommerce/pages/Search%20copy.dart';
 import 'package:ecommerce/pages/Search.dart';
 import 'package:ecommerce/pages/Settings.dart';
 import 'package:ecommerce/providers/Brands_fetch.dart';
@@ -100,6 +101,7 @@ class MyApp extends StatelessWidget {
         "/registration": (context) => Registration(),
         "/location": (context) => LocationPicker(),
         "/search": (context) => Search(),
+        "/search2": (context) => Search2(),
       },
     );
   }

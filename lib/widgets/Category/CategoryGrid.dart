@@ -1,7 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:ecommerce/model/Categories.dart';
 
-class CategoryGrid extends StatelessWidget {
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class CategoryGrid extends StatefulWidget {
   const CategoryGrid({Key? key}) : super(key: key);
+
+  @override
+  State<CategoryGrid> createState() => _CategoryGridState();
+}
+
+class _CategoryGridState extends State<CategoryGrid> {
+  List<CategoriesList> categoryList = [];
+  List<CategoriesList> fetchedList = [];
+
+  late CategoriesList categoryItem;
+  Uri url =
+      Uri.parse("https://flutter-api-three.vercel.app/api/products/categories");
+
+  fetchData() async {
+    //Response   X= Future<Response>
+    http.Response response = await http.get(url);
+    List result = [];
+    if (response.statusCode == 200) {
+      result = jsonDecode(response.body);
+
+      setState(() {
+        for (int i = 0; i < result.length; i++) {
+          categoryItem = CategoriesList.fromJsonData(result[i]);
+          categoryList.add(categoryItem);
+        }
+      });
+    }
+  }
 
   @override
   build(BuildContext context) {
@@ -10,14 +42,14 @@ class CategoryGrid extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       // crossAxisSpacing: 2,
       // mainAxisSpacing: 2,
-      crossAxisCount: 3,
+      crossAxisCount: 2,
       shrinkWrap: true,
       children: [
         for (int i = 0; i < 8; i++)
           Container(
               // height: 100,
-              margin: EdgeInsets.only(bottom: 0),
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              margin: EdgeInsets.only(top: 0),
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,12 +63,19 @@ class CategoryGrid extends StatelessWidget {
                       child:
                           Image.asset("images/1.png", width: 50, height: 50)),
                   SizedBox(
-                    height: 5,
+                    height: 0,
                   ),
                   Text("Shoes"),
                 ],
               )),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchData();
   }
 }

@@ -63,7 +63,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 badgeColor: Colors.red,
                 padding: EdgeInsets.all(7),
                 badgeContent: Text(
-                  "${context.watch<Counter>().count}",
+                  "${context.watch<Counter>().list.length}",
                   style: TextStyle(color: Colors.white),
                 ),
                 child: Icon(

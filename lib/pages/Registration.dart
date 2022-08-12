@@ -11,7 +11,7 @@ class Registration extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100), child: LogSignInAppBar()),
+          preferredSize: Size.fromHeight(50), child: LogSignInAppBar()),
       body: const MyStatefulWidget(),
     );
   }
@@ -40,13 +40,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Form(
           key: _formKey,
           child: ListView(
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.only(bottom: 20, top: 20),
+                  margin: EdgeInsets.only(bottom: 20, top: 0),
                   alignment: Alignment.center,
                   padding: const EdgeInsets.all(7),
                   child: const Text(

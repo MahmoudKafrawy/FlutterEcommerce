@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
 
 class CartBottomNavBar extends StatelessWidget {
   const CartBottomNavBar({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class CartBottomNavBar extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\$250",
+                  "\$${context.watch<CartCounter>().count}",
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

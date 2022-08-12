@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:badges/badges.dart';
 import 'package:ecommerce/pages/Cart.dart';
 import 'package:ecommerce/pages/Categories.dart';
@@ -17,10 +19,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List isinCart = [];
+  int isinCartLength = 0;
   int currentIndex = 0;
+
   final screens = [HomeBody(), Categories(), Me(), Cart()];
   @override
   Widget build(BuildContext context) {
+    List isinCart = [...context.watch<CartCounter>().isinCart];
+    int isinCartLength = context.watch<CartCounter>().isinCartLength;
+
     return Scaffold(
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -71,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                       minHeight: 15,
                     ),
                     child: Text(
-                      "${context.watch<CartCounter>().count}",
+                      "${isinCartLength}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,

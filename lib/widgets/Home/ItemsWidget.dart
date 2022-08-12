@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:ecommerce/providers/Items_fetch.dart';
 import 'package:ecommerce/model/Favorite.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
 
 class ItemsWidget extends StatefulWidget {
   @override
@@ -15,26 +16,20 @@ class ItemsWidget extends StatefulWidget {
 }
 
 class _ItemsWidgetState extends State<ItemsWidget> {
-  Icon favChktrue = Icon(
-    Icons.favorite,
-    size: 25,
-    color: Colors.red,
-  );
-  Icon favChkfalse = Icon(
-    Icons.favorite_border_outlined,
-    size: 25,
-    color: Colors.red,
-  );
   bool fetchFlag = false;
   bool _favFlag = false;
 
   List<Product> productList = [];
   List<Product> favList = [];
+  List isInFavPage = [];
+  List isInCart = [];
 
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
 
   fetchData() async {
+    productList = [];
+    favList = [];
     //Response   X= Future<Response>
     http.Response response = await http.get(url);
     List result = [];
@@ -47,15 +42,21 @@ class _ItemsWidgetState extends State<ItemsWidget> {
           productList.add(productItem);
           if (productList[i].isFavorite! == true) {
             favList.add(productList[i]);
+            context.read<Counter>().addItem(productList[i].id);
+            context.read<Counter>().addToFavPage(productList[i].id);
           }
         }
-        context.read<ItemsFecth>().setValue(productList);
-        context.read<Counter>().setValue(favList.length);
+        print(context.read<ItemsFecth>().fetchFlag);
+        if (context.read<ItemsFecth>().fetchFlag == false) {
+          context.read<ItemsFecth>().setValue(productList);
+          context.read<ItemsFecth>().setFetchFlag();
+          context.read<Counter>().setValue(favList.length);
+        }
       });
     }
   }
 
-  sendFav(id, productFav) async {
+  sendFav(id, i) async {
     try {
       var response = await http.post(
           Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
@@ -67,14 +68,31 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
         if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
           context.read<Counter>().increment();
+          context.read<Counter>().addItem(id);
+          context.read<Counter>().addToFavPage(id);
         } else {
           context.read<Counter>().decrement();
+          context.read<Counter>().removeItem(id);
+          context.read<Counter>().removeFromFavPage(id);
         }
-        print(productFav);
+        print(context.watch<Counter>().count);
       });
     } catch (e) {
       print(e);
     }
+    setState(() {});
+  }
+
+  sendCart(id) {
+    context.read<CartCounter>().addToCartPage(id);
+    print(id);
+    setState(() {});
+  }
+
+  removeCart(id) {
+    context.read<CartCounter>().removeFromCartPage(id);
+    print(id);
+    setState(() {});
   }
 
   // renderFav() {
@@ -129,6 +147,9 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   @override
   Widget build(BuildContext context) {
     productList = [...context.watch<ItemsFecth>().count];
+    isInFavPage = [...context.watch<Counter>().listOfFavPage];
+    isInCart = [...context.watch<CartCounter>().isinCart];
+    context.watch<ItemsFecth>().count;
     return productList.isEmpty
         ? Center(child: CircularProgressIndicator())
         : GridView.count(
@@ -156,7 +177,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               color: Color(0xFF4c53A5),
                               borderRadius: BorderRadius.circular(20)),
                           child: Text(
-                            "-50%",
+                            "${productList[i].discountPercentage}\%",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -167,6 +188,9 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         InkWell(
                             onTap: (() {
                               sendFav(productList[i].id, i);
+                              // setState(() {
+                              //   productList = [];
+                              // });
                               //////////////////////////////////
                               ///Falaky UI
                               /////////////////////////////////
@@ -213,13 +237,18 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               // sendFav(productList[i].id);
                               // renderFav(favList.length);
                             }),
-                            child: productList[i].isFavorite == true
-                                ? FavItemsChk()
-                                : Icon(
-                                    Icons.favorite_outline,
-                                    size: 25,
-                                    color: Colors.red,
-                                  ))
+                            child:
+                                isInFavPage.contains(productList[i].id) == true
+                                    ? Icon(
+                                        Icons.favorite,
+                                        size: 25,
+                                        color: Colors.red,
+                                      )
+                                    : Icon(
+                                        Icons.favorite_outline,
+                                        size: 25,
+                                        color: Colors.red,
+                                      ))
                       ],
                     ),
                     Material(
@@ -234,7 +263,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                   "name": productList[i].name,
                                   "thumbnail": productList[i].thumbnail,
                                   "description": productList[i].description,
-                                  "price": productList[i].price
+                                  "price": productList[i].price,
+                                  "fav": isInFavPage.contains(productList[i].id)
                                 });
                           })
                         },
@@ -286,10 +316,23 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                 color: Color(0xFF4c53A5),
                                 fontWeight: FontWeight.bold),
                           ),
-                          Icon(
-                            Icons.add_shopping_cart_sharp,
-                            size: 25,
-                            color: Color(0xFF4c53A5),
+                          InkWell(
+                            onTap: () {
+                              isInCart.contains(productList[i].id)
+                                  ? removeCart(productList[i].id)
+                                  : sendCart(productList[i].id);
+                            },
+                            child: !isInCart.contains(productList[i].id)
+                                ? Icon(
+                                    Icons.shopping_bag_outlined,
+                                    size: 25,
+                                    color: Color(0xFF4c53A5),
+                                  )
+                                : Icon(
+                                    Icons.shopping_bag,
+                                    size: 25,
+                                    color: Color(0xFF4c53A5),
+                                  ),
                           )
                         ],
                       ),
@@ -308,20 +351,5 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
       fetchFlag = true;
     }
-  }
-}
-
-class FavItemsChk extends StatelessWidget {
-  const FavItemsChk({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.favorite,
-      size: 25,
-      color: Colors.red,
-    );
   }
 }

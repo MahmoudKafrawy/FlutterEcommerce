@@ -40,7 +40,7 @@ class _FavtItemSampleState extends State<FavtItemSample> {
     }
   }
 
-  sendFav(id) async {
+  sendFav(id, i) async {
     try {
       var response = await http.post(
           Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
@@ -48,17 +48,23 @@ class _FavtItemSampleState extends State<FavtItemSample> {
             'Content-Type': "application/x-www-form-urlencoded",
           },
           body: {}).then((value) {
-        print("${jsonDecode(value.body)['updatedProduct']['isFavorite']}");
+        // print("${jsonDecode(value.body)['updatedProduct']['isFavorite']}");
 
-        if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
+        if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == false) {
           // context.read<Counter>().increment();
           // Provider.of<Counter>(context, listen: false).increment();
+          context.read<Counter>().decrement();
+          context.read<Counter>().removeItem(id);
+          context.read<Counter>().removeFromFavPage(id);
+          fetchData();
+          setState(() {
+            favList.removeAt(i);
+          });
+          print(i);
         } else {
-          // context.read<Counter>().decrement();
-          Provider.of<Counter>(context, listen: false).decrement();
-          setState(() {});
+          // Provider.of<Counter>(context, listen: false).decrement();
         }
-        print(context.read<Counter>().count);
+        // print(context.read<Counter>().count);
       });
     } catch (e) {
       print(e);
@@ -67,11 +73,13 @@ class _FavtItemSampleState extends State<FavtItemSample> {
 
   @override
   Widget build(BuildContext context) {
-    return context.read<Counter>().count == 0
-        ? Center(child: Text("Please Add Items"))
+    return favList.length == 0
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
         : Column(
             children: [
-              for (int i = 0; i < context.read<Counter>().count; i++)
+              for (int i = 0; i < context.read<Counter>().list.length; i++)
                 Container(
                   height: 110,
                   margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -125,7 +133,7 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  sendFav(favList[i].id);
+                                  sendFav(favList[i].id, i);
                                 },
                                 child: Icon(
                                   Icons.delete_outline_outlined,

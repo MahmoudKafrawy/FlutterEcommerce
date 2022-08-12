@@ -45,7 +45,7 @@ class _HomeBodyState extends State<HomeBody> {
                         color: Colors.white,
                       ),
                       child: InkWell(
-                        onTap: () => {Navigator.pushNamed(context, "/search")},
+                        onTap: () => {Navigator.pushNamed(context, "/search2")},
                         child: Row(
                           children: [
                             //search

@@ -1,6 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:ecommerce/pages/Favorites.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/favorites_counter.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:ecommerce/pages/LogIn.dart';
 
 class CategoryNavBar extends StatelessWidget {
   @override
@@ -11,9 +15,18 @@ class CategoryNavBar extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () => {
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  duration: Duration(milliseconds: 300),
+                  child: const LogIn(),
+                ),
+              ),
+            },
             child: const Icon(
-              Icons.sort,
+              Icons.login_outlined,
               size: 30,
               color: Color(0xFF4c53a5),
             ),
@@ -34,7 +47,7 @@ class CategoryNavBar extends StatelessWidget {
             badgeColor: Colors.red,
             padding: EdgeInsets.all(7),
             badgeContent: Text(
-              "1",
+              "${context.watch<Counter>().list.length}",
               style: TextStyle(color: Colors.white),
             ),
             child: InkWell(
@@ -42,7 +55,7 @@ class CategoryNavBar extends StatelessWidget {
                   Navigator.pushNamed(context, "/favorites");
                 },
                 child: Icon(
-                  Icons.favorite,
+                  Icons.favorite_border_outlined,
                   color: Color(0xFF4c53a5),
                   size: 30,
                 )),

@@ -21,6 +21,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
       Uri.parse("https://flutter-api-three.vercel.app/api/products/brands");
 
   fetchData() async {
+    brandsList = [];
     //Response   X= Future<Response>
     http.Response response = await http.get(url);
     List result = [];
