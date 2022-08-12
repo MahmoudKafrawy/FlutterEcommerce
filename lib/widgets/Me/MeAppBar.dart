@@ -7,14 +7,13 @@ class MeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.only(top: 50, right: 25, left: 25, bottom: 15),
+      padding: EdgeInsets.only(top: 40, right: 20, left: 20, bottom: 15),
       child: Row(
         children: [
           InkWell(
             onTap: () {},
             child: const Icon(
-              Icons.sort,
+              Icons.login,
               size: 30,
               color: Color(0xFF4c53a5),
             ),

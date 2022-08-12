@@ -1,14 +1,16 @@
 import 'package:ecommerce/pages/Favorites.dart';
+import 'package:ecommerce/widgets/Favorites/FavtItemSample.dart';
 import 'package:ecommerce/widgets/Me/MeAppBar.dart';
 import 'package:ecommerce/widgets/Settings/SettingAppBar.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce/widgets/Favorites/FavtItemSample.dart';
 
 class Me extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          PreferredSize(preferredSize: Size.fromHeight(100), child: MeAppBar()),
+          PreferredSize(preferredSize: Size.fromHeight(70), child: MeAppBar()),
       body: Column(children: [
         Flexible(
           child: MediaQuery.removePadding(
@@ -16,7 +18,7 @@ class Me extends StatelessWidget {
             removeTop: true,
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.only(top: 15),
+              padding: EdgeInsets.only(top: 15, left: 15, right: 15),
               decoration: const BoxDecoration(
                 color: Color(0xFFedecf2),
                 borderRadius: BorderRadius.only(
@@ -32,7 +34,7 @@ class Me extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(right: 180, bottom: 40, top: 15),
                       child: Text(
-                        'Welcome "Name"',
+                        'Welcome',
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
@@ -47,12 +49,17 @@ class Me extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/cart");
+                            },
+                            child: Text(
+                              'More',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline),
+                            ),
                           ),
                         ],
                       ),
@@ -60,7 +67,7 @@ class Me extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(bottom: 20),
                       child: Container(
-                        margin: EdgeInsets.only(bottom: 40),
+                        margin: EdgeInsets.only(bottom: 10),
                         width: MediaQuery.of(context).size.width * 0.9,
                         // height: MediaQuery.of(context).size.width * 0.15,
                         decoration: BoxDecoration(color: Colors.white),
@@ -68,24 +75,25 @@ class Me extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                margin: EdgeInsets.only(left: 20, top: 10),
-                                child: Text(
-                                  "Price: \$487.00",
-                                  style: TextStyle(
-                                      color: Color(0xFF4C53A5),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                )),
-                            Container(
                                 margin: EdgeInsets.only(
                                     left: 20, top: 10, bottom: 10),
                                 child: Text(
-                                  "Created at:",
+                                  "Total Price : \$487.00",
                                   style: TextStyle(
                                       color: Color(0xFF4C53A5),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),
                                 )),
+                            // Container(
+                            //     margin: EdgeInsets.only(
+                            //         left: 20, top: 10, bottom: 10),
+                            //     child: Text(
+                            //       "Created at:",
+                            //       style: TextStyle(
+                            //           color: Color(0xFF4C53A5),
+                            //           fontWeight: FontWeight.bold,
+                            //           fontSize: 18),
+                            //     )),
                           ],
                         ),
                       ),
@@ -114,6 +122,10 @@ class Me extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: FavtItemSample(),
+                    )
                   ],
                 ),
               ),
