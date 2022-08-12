@@ -22,6 +22,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   List<Product> productList = [];
   List<Product> favList = [];
   List isInFavPage = [];
+  List isInCart = [];
 
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
@@ -85,6 +86,13 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   sendCart(id) {
     context.read<CartCounter>().addToCartPage(id);
     print(id);
+    setState(() {});
+  }
+
+  removeCart(id) {
+    context.read<CartCounter>().removeFromCartPage(id);
+    print(id);
+    setState(() {});
   }
 
   // renderFav() {
@@ -140,6 +148,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   Widget build(BuildContext context) {
     productList = [...context.watch<ItemsFecth>().count];
     isInFavPage = [...context.watch<Counter>().listOfFavPage];
+    isInCart = [...context.watch<CartCounter>().isinCart];
     context.watch<ItemsFecth>().count;
     return productList.isEmpty
         ? Center(child: CircularProgressIndicator())
@@ -168,7 +177,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               color: Color(0xFF4c53A5),
                               borderRadius: BorderRadius.circular(20)),
                           child: Text(
-                            "-50%",
+                            "${productList[i].discountPercentage}\%",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -255,7 +264,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                                   "thumbnail": productList[i].thumbnail,
                                   "description": productList[i].description,
                                   "price": productList[i].price,
-                                  "fav": productList[i].isFavorite
+                                  "fav": isInFavPage.contains(productList[i].id)
                                 });
                           })
                         },
@@ -309,13 +318,21 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                           ),
                           InkWell(
                             onTap: () {
-                              sendCart(productList[i].id);
+                              isInCart.contains(productList[i].id)
+                                  ? removeCart(productList[i].id)
+                                  : sendCart(productList[i].id);
                             },
-                            child: Icon(
-                              Icons.add_shopping_cart_sharp,
-                              size: 25,
-                              color: Color(0xFF4c53A5),
-                            ),
+                            child: !isInCart.contains(productList[i].id)
+                                ? Icon(
+                                    Icons.shopping_bag_outlined,
+                                    size: 25,
+                                    color: Color(0xFF4c53A5),
+                                  )
+                                : Icon(
+                                    Icons.shopping_bag,
+                                    size: 25,
+                                    color: Color(0xFF4c53A5),
+                                  ),
                           )
                         ],
                       ),

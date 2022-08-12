@@ -6,6 +6,8 @@ class Product {
   String? thumbnail;
   int? price;
   bool? isFavorite;
+  int? discountPercentage;
+  String? category;
 
   Product(
       {this.name,
@@ -14,7 +16,9 @@ class Product {
       this.description,
       this.thumbnail,
       this.price,
-      this.isFavorite});
+      this.isFavorite,
+      this.discountPercentage,
+      this.category});
 
   factory Product.fromJsonData(Map<String, dynamic> data) {
     return Product(
@@ -24,6 +28,8 @@ class Product {
         name: data['name'],
         thumbnail: data['thumbnail'],
         price: data['price'],
-        isFavorite: data['isFavorite']);
+        isFavorite: data['isFavorite'],
+        discountPercentage: data['discountPercentage'],
+        category: data['category']);
   }
 }

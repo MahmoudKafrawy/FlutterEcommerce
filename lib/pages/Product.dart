@@ -74,12 +74,18 @@ class Product extends StatelessWidget {
       Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Row(children: [
-          Text(
-            "${arguments['name']}",
-            style: TextStyle(
-                fontSize: 25,
-                color: Color(0xFF4c53a5),
-                fontWeight: FontWeight.bold),
+          Container(
+            width: 320,
+            child: RichText(
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                strutStyle: StrutStyle(fontSize: 15.0),
+                text: TextSpan(
+                    style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4c53a5)),
+                    text: "${arguments['name']}")),
           ),
         ]),
       ),
@@ -103,47 +109,6 @@ class Product extends StatelessWidget {
               print(rating);
             },
           ),
-          Container(
-              child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 10),
-                    ]),
-                child: Icon(
-                  CupertinoIcons.plus,
-                  size: 18,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                child: Text("1"),
-              ),
-              Container(
-                padding: EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 10),
-                    ]),
-                child: Icon(
-                  CupertinoIcons.minus,
-                  size: 18,
-                ),
-              )
-            ],
-          ))
         ]),
       ),
       Padding(

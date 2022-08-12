@@ -6,6 +6,7 @@ class CartCounter with ChangeNotifier {
 
   int get count => _count;
   List get isinCart => _isInCart;
+  int get isinCartLength => _isInCart.length;
 
   void increment() {
     _count++;

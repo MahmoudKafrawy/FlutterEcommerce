@@ -82,7 +82,7 @@ class _Search2State extends State<Search2> {
                         controller: searchBarController,
                         autofocus: true,
                         decoration: const InputDecoration(
-                            border: InputBorder.none, hintText: "search2..."),
+                            border: InputBorder.none, hintText: "search..."),
                       ),
                     ),
                   ),
@@ -100,7 +100,28 @@ class _Search2State extends State<Search2> {
               itemCount: productList.length,
               itemBuilder: (BuildContext context, int index) {
                 final pro = searchList[index];
-                return Text(searchList[index].name!);
+                return Padding(
+                  padding: EdgeInsets.only(left: 25, right: 20),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: InkWell(
+                      onTap: () => {
+                        Future.delayed(const Duration(milliseconds: 200), () {
+                          Navigator.pushNamed(context, "/product", arguments: {
+                            "name": productList[index].name,
+                            "thumbnail": productList[index].thumbnail,
+                            "description": productList[index].description,
+                            "price": productList[index].price,
+                            "fav": productList[index].isFavorite
+                          });
+                        })
+                      },
+                      child: Text("${productList[index].name!}" +
+                          " in " +
+                          "${productList[index].category}"),
+                    ),
+                  ),
+                );
               },
             ),
           )
