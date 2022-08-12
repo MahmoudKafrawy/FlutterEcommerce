@@ -14,6 +14,7 @@ import 'package:ecommerce/pages/Search%20copy.dart';
 import 'package:ecommerce/pages/Search.dart';
 import 'package:ecommerce/pages/Settings.dart';
 import 'package:ecommerce/providers/Brands_fetch.dart';
+import 'package:ecommerce/providers/Categories_provider.dart';
 import 'package:ecommerce/providers/Items_fetch.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,9 @@ void main() async {
           ),
           ChangeNotifierProvider(
             create: (context) => BrandsFetch(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CategoriesProvider(),
           )
         ],
         child: MyApp(
