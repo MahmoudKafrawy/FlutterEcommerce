@@ -8,6 +8,7 @@ import 'package:ecommerce/pages/LocationPicker.dart';
 import 'package:ecommerce/pages/Me.dart';
 import 'package:ecommerce/pages/Payment.dart';
 import 'package:ecommerce/pages/Product.dart';
+import 'package:ecommerce/pages/Products.dart';
 import 'package:ecommerce/pages/Registration.dart';
 import 'package:ecommerce/pages/Search.dart';
 import 'package:ecommerce/pages/Settings.dart';
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
         // ),
       ),
       routes: {
+        // "/": (context) => Productss(),
         "/": (context) => showHome ? HomePage() : OnBoardingPage(),
         "/homepage": (context) => HomePage(),
         "/categories": (context) => Categories(),
@@ -90,6 +92,7 @@ class MyApp extends StatelessWidget {
         "/favorites": (context) => Favorites(),
         "/cart": (context) => Cart(),
         "/product": (context) => Product(),
+        // "/products": (context) => Productss(brandName: "",),
         "/checkout": (context) => CheckOut(),
         "/payment": (context) => Payment(),
         "/setting": (context) => Settings(),

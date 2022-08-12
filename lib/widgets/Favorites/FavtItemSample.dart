@@ -85,8 +85,7 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                         height: 70,
                         width: 70,
                         margin: EdgeInsets.only(right: 10, left: 20),
-                        child:
-                            Image(image: NetworkImage(favList[i].thumbnail!)),
+                        child: Image(image: NetworkImage(favList[i].thumbnail)),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 10),

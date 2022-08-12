@@ -1,3 +1,5 @@
+import 'package:ecommerce/model/Product.dart';
+
 class Brands {
   String? brand;
   String? thumbnail;

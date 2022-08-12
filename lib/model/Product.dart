@@ -3,7 +3,7 @@ class Product {
   int? userId;
   String? id;
   String? description;
-  String? thumbnail;
+  String thumbnail;
   int? price;
   bool? isFavorite;
 
@@ -12,7 +12,7 @@ class Product {
       this.userId,
       this.id,
       this.description,
-      this.thumbnail,
+      required this.thumbnail,
       this.price,
       this.isFavorite});
 

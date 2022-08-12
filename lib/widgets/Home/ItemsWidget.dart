@@ -241,7 +241,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         child: Container(
                           padding: EdgeInsets.only(top: 10),
                           child: Image(
-                            image: NetworkImage(productList[i].thumbnail!),
+                            image: NetworkImage(productList[i].thumbnail),
                             height: 100,
                           ),
                         ),

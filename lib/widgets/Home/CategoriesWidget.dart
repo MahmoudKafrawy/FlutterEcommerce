@@ -1,3 +1,4 @@
+import 'package:ecommerce/pages/Products.dart';
 import 'package:ecommerce/providers/Brands_fetch.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/model/Brands.dart';
@@ -34,6 +35,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
       });
       context.read<BrandsFetch>().setValue(brandsList);
     }
+
+    print(result);
   }
 
   @override
@@ -47,26 +50,38 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
           : Row(
               children: [
                 for (int i = 0; i < brandsList.length; i++)
-                  Container(
-                      margin: EdgeInsets.only(left: 15),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: NetworkImage(
-                              brandsList[i].thumbnail!,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Productss(
+                                    brandName: brandsList[i].brand!,
+                                  )));
+                      // Navigator.pushNamed(context, "/products",
+                      //     arguments: "Helooooo");
+                    },
+                    child: Container(
+                        margin: EdgeInsets.only(left: 15),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image(
+                              image: NetworkImage(
+                                brandsList[i].thumbnail as String,
+                              ),
+                              height: 100,
+                              width: 100,
                             ),
-                            height: 100,
-                            width: 100,
-                          ),
-                          Text(brandsList[i].brand!)
-                        ],
-                      )),
+                            Text(brandsList[i].brand!)
+                          ],
+                        )),
+                  ),
               ],
             ),
     );
