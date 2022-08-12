@@ -5,6 +5,9 @@ import 'package:ecommerce/widgets/Settings/SettingAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/widgets/Favorites/FavtItemSample.dart';
 
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
+
 class Me extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -78,7 +81,8 @@ class Me extends StatelessWidget {
                                 margin: EdgeInsets.only(
                                     left: 20, top: 10, bottom: 10),
                                 child: Text(
-                                  "Total Price : \$487.00",
+                                  "Total Price : " +
+                                      "${context.watch<CartCounter>().count}",
                                   style: TextStyle(
                                       color: Color(0xFF4C53A5),
                                       fontWeight: FontWeight.bold,
