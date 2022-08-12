@@ -73,7 +73,9 @@ class _FavtItemSampleState extends State<FavtItemSample> {
   @override
   Widget build(BuildContext context) {
     return favList.length == 0
-        ? Center(child: CircularProgressIndicator())
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
         : Column(
             children: [
               for (int i = 0; i < context.read<Counter>().list.length; i++)

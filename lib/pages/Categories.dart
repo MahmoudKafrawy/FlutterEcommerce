@@ -66,24 +66,26 @@ class _CategoriesState extends State<Categories> {
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5),
-                        width: MediaQuery.of(context).size.width * 0.20,
+                        margin: EdgeInsets.only(right: 5),
+                        width: MediaQuery.of(context).size.width * 0.25,
                         height: MediaQuery.of(context).size.height * 0.7,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only()),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              for (int i = 1; i < categoryList.length; i++)
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                    textStyle: const TextStyle(
-                                      fontSize: 10,
-                                    ),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                          children: [
+                            for (int i = 1; i < categoryList.length; i++)
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                    fontSize: 10,
                                   ),
-                                  onPressed: () {},
+                                ),
+                                onPressed: () {},
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
                                   child: Text(
                                     categoryList[i].name!,
                                     style: TextStyle(
@@ -91,8 +93,8 @@ class _CategoriesState extends State<Categories> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                            ],
-                          ),
+                              ),
+                          ],
                         ),
                       ),
                       Flexible(

@@ -15,16 +15,6 @@ class ItemsWidget extends StatefulWidget {
 }
 
 class _ItemsWidgetState extends State<ItemsWidget> {
-  Icon favChktrue = Icon(
-    Icons.favorite,
-    size: 25,
-    color: Colors.red,
-  );
-  Icon favChkfalse = Icon(
-    Icons.favorite_border_outlined,
-    size: 25,
-    color: Colors.red,
-  );
   bool fetchFlag = false;
   bool _favFlag = false;
 
@@ -52,8 +42,12 @@ class _ItemsWidgetState extends State<ItemsWidget> {
             context.read<Counter>().addItem(productList[i].id);
           }
         }
-        context.read<ItemsFecth>().setValue(productList);
-        context.read<Counter>().setValue(favList.length);
+        print(context.read<ItemsFecth>().fetchFlag);
+        if (context.read<ItemsFecth>().fetchFlag == false) {
+          context.read<ItemsFecth>().setValue(productList);
+          context.read<ItemsFecth>().setFetchFlag();
+          context.read<Counter>().setValue(favList.length);
+        }
       });
     }
   }
@@ -225,7 +219,11 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               // renderFav(favList.length);
                             }),
                             child: productList[i].isFavorite == true
-                                ? FavItemsChk()
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 25,
+                                    color: Colors.red,
+                                  )
                                 : Icon(
                                     Icons.favorite_outline,
                                     size: 25,
@@ -319,20 +317,5 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
       fetchFlag = true;
     }
-  }
-}
-
-class FavItemsChk extends StatelessWidget {
-  const FavItemsChk({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      Icons.favorite,
-      size: 25,
-      color: Colors.red,
-    );
   }
 }

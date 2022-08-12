@@ -12,7 +12,7 @@ class LogIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100), child: LogSignInAppBar()),
+          preferredSize: Size.fromHeight(50), child: LogSignInAppBar()),
       body: const MyStatefulWidget(),
     );
   }
@@ -37,7 +37,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Form(
           key: _formKey,
           child: ListView(
@@ -200,7 +200,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   const Text('Does not have account?'),
                   TextButton(
                     child: const Text(
-                      'Sign in',
+                      'Sign Up',
                       style: TextStyle(fontSize: 20, color: Color(0xFF4C53A5)),
                     ),
                     onPressed: () =>

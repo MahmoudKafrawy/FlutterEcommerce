@@ -8,25 +8,22 @@ import 'package:provider/provider.dart';
 import 'package:ecommerce/providers/favorites_counter.dart';
 import 'package:ecommerce/providers/Items_fetch.dart';
 
-class Search extends StatefulWidget {
-  Search({Key? key}) : super(key: key);
+class Search2 extends StatefulWidget {
+  Search2({Key? key}) : super(key: key);
 
   @override
-  State<Search> createState() => _SearchState();
+  State<Search2> createState() => _Search2State();
 }
 
-class _SearchState extends State<Search> {
+class _Search2State extends State<Search2> {
   TextEditingController searchBarController = TextEditingController();
   List<Product> productList = [];
   List<Product> searchList = [];
-  List<Product> searchListFinal = [];
 
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
 
   fetchData() async {
-    productList = [];
-    searchList = [];
     //Response   X= Future<Response>
     http.Response response = await http.get(url);
     List result = [];
@@ -38,20 +35,21 @@ class _SearchState extends State<Search> {
           productItem = Product.fromJsonData(result[i]);
           productList.add(productItem);
         }
+        searchList = productList;
       });
     }
   }
 
-  searchInData(string) {
-    for (var i = 0; i < productList.length; i++) {
-      if (productList[i].name!.contains(string) == true) {
-        searchList.add(productList[i]);
-      }
-    }
-    searchListFinal = searchList;
+  // searchInData(string) {
+  //   for (var i = 0; i < productList.length; i++) {
+  //     if (productList[i].name!.contains(string) == true) {
+  //       searchList.add(productList[i]);
+  //     }
+  //   }
+  //   searchListFinal = searchList;
 
-    setState(() {});
-  }
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +77,12 @@ class _SearchState extends State<Search> {
                     child: Container(
                       margin: EdgeInsets.only(left: 5),
                       height: 50,
-                      child: TextFormField(
+                      child: TextField(
+                        onChanged: searchItem,
                         controller: searchBarController,
                         autofocus: true,
                         decoration: const InputDecoration(
-                            border: InputBorder.none, hintText: "Search..."),
+                            border: InputBorder.none, hintText: "search2..."),
                       ),
                     ),
                   ),
@@ -96,17 +95,29 @@ class _SearchState extends State<Search> {
               ),
             ),
           ),
-          Column(
-            children: [
-              for (int i = 0; i < searchListFinal.length; i++)
-                Container(
-                  child: Text("${searchList[i].name}"),
-                ),
-            ],
+          Expanded(
+            child: ListView.builder(
+              itemCount: productList.length,
+              itemBuilder: (BuildContext context, int index) {
+                final pro = searchList[index];
+                return Text(searchList[index].name!);
+              },
+            ),
           )
         ],
       ),
     );
+  }
+
+  void searchItem(String query) {
+    final sugget = searchList.where((pro) {
+      final protitle = pro.name!.toLowerCase();
+      final input = query.toLowerCase();
+      return protitle.contains(input);
+    }).toList();
+    setState(() {
+      productList = sugget;
+    });
   }
 
   @override
@@ -114,9 +125,9 @@ class _SearchState extends State<Search> {
     super.initState();
     fetchData();
 
-    searchBarController.addListener(() {
-      searchInData(searchBarController.text);
-    });
+    // searchBarController.addListener(() {
+    //   searchInData(searchBarController.text);
+    // });
   }
 
   // @override
