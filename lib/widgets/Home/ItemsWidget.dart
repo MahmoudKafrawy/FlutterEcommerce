@@ -35,6 +35,8 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
 
   fetchData() async {
+    productList = [];
+    favList = [];
     //Response   X= Future<Response>
     http.Response response = await http.get(url);
     List result = [];
@@ -47,6 +49,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
           productList.add(productItem);
           if (productList[i].isFavorite! == true) {
             favList.add(productList[i]);
+            context.read<Counter>().addItem(productList[i].id);
           }
         }
         context.read<ItemsFecth>().setValue(productList);
@@ -67,14 +70,18 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
         if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
           context.read<Counter>().increment();
+          context.read<Counter>().addItem(id);
         } else {
           context.read<Counter>().decrement();
+          context.read<Counter>().removeItem(id);
         }
         print(productFav);
+        print(context.watch<Counter>().count);
       });
     } catch (e) {
       print(e);
     }
+    setState(() {});
   }
 
   // renderFav() {
@@ -129,6 +136,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   @override
   Widget build(BuildContext context) {
     productList = [...context.watch<ItemsFecth>().count];
+    context.watch<ItemsFecth>().count;
     return productList.isEmpty
         ? Center(child: CircularProgressIndicator())
         : GridView.count(
@@ -167,6 +175,9 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                         InkWell(
                             onTap: (() {
                               sendFav(productList[i].id, i);
+                              setState(() {
+                                productList = [];
+                              });
                               //////////////////////////////////
                               ///Falaky UI
                               /////////////////////////////////
