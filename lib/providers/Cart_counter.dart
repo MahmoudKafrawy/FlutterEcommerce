@@ -18,7 +18,7 @@ class CartCounter with ChangeNotifier {
   }
 
   void setValue(a) {
-    _count += a as int;
+    _count = a;
     notifyListeners();
   }
 

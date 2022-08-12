@@ -31,6 +31,8 @@ class _CartItemSampleState extends State<CartItemSample> {
       result = jsonDecode(response.body);
 
       setState(() {
+        context.read<CartCounter>().setValue(0);
+
         for (int i = 0; i < result.length; i++) {
           productItem = Product.fromJsonData(result[i]);
           productList.add(productItem);
@@ -38,11 +40,12 @@ class _CartItemSampleState extends State<CartItemSample> {
           if (isInCart.contains(productList[i].id) == true) {
             favList.add(productList[i]);
           }
-          for (int i = 0; i < favList.length; i++) {
-            totalprice = favList[i].price!;
-          }
         }
-        context.read<CartCounter>().setValue(totalprice);
+        for (int i = 0; i < favList.length; i++) {
+          totalprice += favList[i].price!;
+          context.read<CartCounter>().setValue(totalprice);
+          // totalprice = favList[i].price!;
+        }
       });
 
       print("hello");
