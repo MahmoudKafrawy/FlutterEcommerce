@@ -20,6 +20,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
 
   List<Product> productList = [];
   List<Product> favList = [];
+  List isInFavPage = [];
 
   late Product productItem;
   Uri url = Uri.parse("https://flutter-api-three.vercel.app/api/products");
@@ -40,6 +41,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
           if (productList[i].isFavorite! == true) {
             favList.add(productList[i]);
             context.read<Counter>().addItem(productList[i].id);
+            context.read<Counter>().addToFavPage(productList[i].id);
           }
         }
         print(context.read<ItemsFecth>().fetchFlag);
@@ -52,7 +54,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
     }
   }
 
-  sendFav(id, productFav) async {
+  sendFav(id, i) async {
     try {
       var response = await http.post(
           Uri.parse("https://flutter-api-three.vercel.app/api/products/${id}"),
@@ -65,11 +67,12 @@ class _ItemsWidgetState extends State<ItemsWidget> {
         if (jsonDecode(value.body)['updatedProduct']['isFavorite'] == true) {
           context.read<Counter>().increment();
           context.read<Counter>().addItem(id);
+          context.read<Counter>().addToFavPage(id);
         } else {
           context.read<Counter>().decrement();
           context.read<Counter>().removeItem(id);
+          context.read<Counter>().removeFromFavPage(id);
         }
-        print(productFav);
         print(context.watch<Counter>().count);
       });
     } catch (e) {
@@ -130,6 +133,7 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   @override
   Widget build(BuildContext context) {
     productList = [...context.watch<ItemsFecth>().count];
+    isInFavPage = [...context.watch<Counter>().listOfFavPage];
     context.watch<ItemsFecth>().count;
     return productList.isEmpty
         ? Center(child: CircularProgressIndicator())
@@ -218,17 +222,18 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                               // sendFav(productList[i].id);
                               // renderFav(favList.length);
                             }),
-                            child: productList[i].isFavorite == true
-                                ? Icon(
-                                    Icons.favorite,
-                                    size: 25,
-                                    color: Colors.red,
-                                  )
-                                : Icon(
-                                    Icons.favorite_outline,
-                                    size: 25,
-                                    color: Colors.red,
-                                  ))
+                            child:
+                                isInFavPage.contains(productList[i].id) == true
+                                    ? Icon(
+                                        Icons.favorite,
+                                        size: 25,
+                                        color: Colors.red,
+                                      )
+                                    : Icon(
+                                        Icons.favorite_outline,
+                                        size: 25,
+                                        color: Colors.red,
+                                      ))
                       ],
                     ),
                     Material(

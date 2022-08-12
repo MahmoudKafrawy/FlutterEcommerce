@@ -55,6 +55,7 @@ class _FavtItemSampleState extends State<FavtItemSample> {
           // Provider.of<Counter>(context, listen: false).increment();
           context.read<Counter>().decrement();
           context.read<Counter>().removeItem(id);
+          context.read<Counter>().removeFromFavPage(id);
           fetchData();
           setState(() {
             favList.removeAt(i);
