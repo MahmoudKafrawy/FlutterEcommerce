@@ -86,7 +86,7 @@ class _CartItemSampleState extends State<CartItemSample> {
                             width: 70,
                             margin: EdgeInsets.only(right: 15, left: 20),
                             child: Image(
-                                image: NetworkImage(favList[i].thumbnail!)),
+                                image: NetworkImage(favList[i].thumbnail)),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
