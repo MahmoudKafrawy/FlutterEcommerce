@@ -82,7 +82,7 @@ class Me extends StatelessWidget {
                                     left: 20, top: 10, bottom: 10),
                                 child: Text(
                                   "Total Price : " +
-                                      "${context.watch<CartCounter>().count}",
+                                      "\$${context.watch<CartCounter>().count}",
                                   style: TextStyle(
                                       color: Color(0xFF4C53A5),
                                       fontWeight: FontWeight.bold,

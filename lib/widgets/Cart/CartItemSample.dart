@@ -95,13 +95,13 @@ class _CartItemSampleState extends State<CartItemSample> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 RichText(
-                                    maxLines: 1,
+                                    maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     strutStyle: StrutStyle(fontSize: 14.0),
                                     text: TextSpan(
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18,
+                                            fontSize: 15,
                                             color: Color(0xFF4C53A5)),
                                         text: favList[i].name!)),
                                 Text(
