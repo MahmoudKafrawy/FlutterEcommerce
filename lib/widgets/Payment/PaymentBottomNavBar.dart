@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
 
 class PaymentBottomNavBar extends StatelessWidget {
   const PaymentBottomNavBar({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class PaymentBottomNavBar extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "\$520",
+                  "\$${context.watch<CartCounter>().count + 20}",
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

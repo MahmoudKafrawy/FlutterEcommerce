@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../widgets/Cart/CartItemSample.dart';
 import '../widgets/Payment/PaymentBottomNavBar.dart';
 
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
+
 class _TextStyle {
   static final style1 = TextStyle(
       fontSize: 20, color: Color(0xFF4c53a5), fontWeight: FontWeight.bold);
@@ -32,7 +35,7 @@ class Payment extends StatelessWidget {
                             style: _TextStyle.style1,
                           ),
                           Text(
-                            "\$500",
+                            "\$${context.watch<CartCounter>().count}",
                             style: _TextStyle.style1,
                           )
                         ],

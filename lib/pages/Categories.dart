@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:ecommerce/model/Categories.dart';
+import 'package:provider/provider.dart';
+import 'package:ecommerce/providers/Categories_provider.dart';
 
 class Categories extends StatefulWidget {
   @override
@@ -33,6 +35,12 @@ class _CategoriesState extends State<Categories> {
         }
       });
     }
+  }
+
+  chooseCat(catname) {
+    context.read<CategoriesProvider>().setValue(catname);
+    print(catname);
+    setState(() {});
   }
 
   @override
@@ -83,7 +91,9 @@ class _CategoriesState extends State<Categories> {
                                     fontSize: 10,
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  chooseCat(categoryList[i].name);
+                                },
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(

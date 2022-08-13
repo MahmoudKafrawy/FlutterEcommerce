@@ -65,7 +65,7 @@ class _LocationPickerState extends State<LocationPicker> {
       ),
       pinColor: Colors.blue,
       context: context,
-      addressPlaceHolder: "واحد",
+      addressPlaceHolder: "iti Suez Canal",
       addressTitle: "عنوان التوصيل",
       apiKey: "AIzaSyCVn9thXMk_mAJ7i8JxmoKGQCX47KfLyiw",
       appBarTitle: "حدد موقع التوصيل",

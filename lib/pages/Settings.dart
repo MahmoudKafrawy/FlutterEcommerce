@@ -1,3 +1,4 @@
+import 'package:ecommerce/pages/auth_screen.dart';
 import 'package:ecommerce/widgets/Category/CategoryGrid.dart';
 import 'package:ecommerce/widgets/Category/CategoryNavBar.dart';
 import 'package:ecommerce/widgets/SearchWidget.dart';
@@ -10,7 +11,7 @@ class Settings extends StatelessWidget {
     return Scaffold(
       body: Column(children: [
         Container(
-          padding: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 0),
           child: SettingAppBar(),
         ),
         Flexible(
@@ -31,39 +32,102 @@ class Settings extends StatelessWidget {
                 // mainAxisSize: MainAxisSize.min,
 
                 children: [
-                  for (int i = 0; i < 4; i++)
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: Text(
-                                  "Address",
-                                  style: TextStyle(
-                                      color: Color(0xFF4C53A5),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                )),
-                            Container(
-                                margin: EdgeInsets.only(right: 20),
-                                child: Text(
-                                  "Ismalia >",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(left: 20),
+                              child: Text(
+                                "User name",
+                                style: TextStyle(
+                                    color: Color(0xFF4C53A5),
                                     fontWeight: FontWeight.bold,
-                                  ),
-                                )),
-                          ],
-                        ),
+                                    fontSize: 18),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Text(
+                                "Test >",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                        ],
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(left: 20),
+                              child: Text(
+                                "Currency",
+                                style: TextStyle(
+                                    color: Color(0xFF4C53A5),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Text(
+                                " USD >",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                              margin: EdgeInsets.only(left: 20),
+                              child: Text(
+                                "Address",
+                                style: TextStyle(
+                                    color: Color(0xFF4C53A5),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              )),
+                          Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Text(
+                                "Ismalia >",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.4,
                     height: MediaQuery.of(context).size.width * 0.1,
@@ -73,13 +137,21 @@ class Settings extends StatelessWidget {
                     margin: EdgeInsets.only(
                         top: MediaQuery.of(context).size.width * 0.05),
                     child: Center(
-                      child: Text(
-                        "Log out",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.045),
+                      child: InkWell(
+                        onTap: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AuthScreen()));
+                        }),
+                        child: Text(
+                          "Log out",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.045),
+                        ),
                       ),
                     ),
                   )

@@ -102,7 +102,6 @@ class _FavtItemSampleState extends State<FavtItemSample> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: 180,
                               child: RichText(
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,

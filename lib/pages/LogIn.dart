@@ -2,6 +2,10 @@ import 'package:ecommerce/widgets/LogIn/LogSignInAppBar.dart';
 import 'package:ecommerce/widgets/Me/MeAppBar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth.dart';
+import '../model/http_exception.dart';
 
 class LogIn extends StatelessWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -34,6 +38,60 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   bool isHiddenPass = true;
   final chk = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) {
+      // Invalid!
+      return;
+    }
+    _formKey.currentState?.save();
+
+    try {
+      // Log user in
+      await Provider.of<Auth>(context, listen: false).login(
+        nameController.text,
+        passwordController.text,
+      );
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'This email address is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'This password is too weak.';
+      } else if (error.toString().contains('No user found')) {
+        errorMessage = 'Could not find a user with that email.';
+      } else if (error.toString().contains('Wrong password')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
+    } catch (error) {
+      const errorMessage =
+          'Could not authenticate you. Please try again later.';
+      _showErrorDialog(errorMessage);
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -95,7 +153,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter password";
-                    } else if (value.length <= 6) {
+                    } else if (value.length <= 5) {
                       return "Password must be more than 6 fileds";
                     }
                     return null;
@@ -169,7 +227,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       } else {
-                        Navigator.pushNamed(context, "/homepage");
+                        _submit();
                       }
                     },
                     child: Container(

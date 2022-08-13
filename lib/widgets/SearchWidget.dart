@@ -18,7 +18,7 @@ class SearchWidget extends StatelessWidget {
           //search
           Flexible(
             child: InkWell(
-              onTap: () => {Navigator.pushNamed(context, "/search")},
+              onTap: () => {Navigator.pushNamed(context, "/search2")},
               child: Container(
                 margin: EdgeInsets.only(left: 5),
                 height: 50,
