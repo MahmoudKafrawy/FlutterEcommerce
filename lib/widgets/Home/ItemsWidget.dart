@@ -260,11 +260,15 @@ class _ItemsWidgetState extends State<ItemsWidget> {
                           Future.delayed(const Duration(milliseconds: 200), () {
                             Navigator.pushNamed(context, "/product",
                                 arguments: {
+                                  "id": productList[i].id,
                                   "name": productList[i].name,
                                   "thumbnail": productList[i].thumbnail,
                                   "description": productList[i].description,
                                   "price": productList[i].price,
-                                  "fav": isInFavPage.contains(productList[i].id)
+                                  "fav": isInFavPage.contains(
+                                    productList[i].id,
+                                  ),
+                                  "cart": isInCart.contains(productList[i].id)
                                 });
                           })
                         },

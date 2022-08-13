@@ -79,31 +79,55 @@ class _CategoriesState extends State<Categories> {
                         height: MediaQuery.of(context).size.height * 0.7,
                         decoration: BoxDecoration(
                           color: Colors.white,
+                          border: Border.all(color: Color(0xFF4c53a5)),
                         ),
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                           children: [
                             for (int i = 1; i < categoryList.length; i++)
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  textStyle: const TextStyle(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  chooseCat(categoryList[i].name);
-                                },
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    categoryList[i].name!,
-                                    style: TextStyle(
-                                        color: Color(0xFF4c53a5),
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
+                              context.watch<CategoriesProvider>().catName ==
+                                      categoryList[i].name
+                                  ? TextButton(
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: Color(0xFF4c53a5),
+                                        textStyle: const TextStyle(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        chooseCat(categoryList[i].name);
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          categoryList[i].name!,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    )
+                                  : TextButton(
+                                      style: TextButton.styleFrom(
+                                        textStyle: const TextStyle(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        chooseCat(categoryList[i].name);
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          categoryList[i].name!,
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 168, 168, 168),
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
                           ],
                         ),
                       ),

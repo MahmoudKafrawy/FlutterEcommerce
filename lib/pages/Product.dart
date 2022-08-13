@@ -2,8 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../widgets/ProductAppBar.dart';
+import 'package:ecommerce/providers/Cart_counter.dart';
+import 'package:provider/provider.dart';
 
-class Product extends StatelessWidget {
+class Product extends StatefulWidget {
+  @override
+  State<Product> createState() => _ProductState();
+}
+
+class _ProductState extends State<Product> {
   List<Color> clrs = [
     Colors.red,
     Colors.green,
@@ -11,9 +18,23 @@ class Product extends StatelessWidget {
     Colors.indigo,
     Colors.orange
   ];
+  List isInCart = [];
+
+  sendCart(id) {
+    context.read<CartCounter>().addToCartPage(id);
+    print(id);
+    setState(() {});
+  }
+
+  removeCart(id) {
+    context.read<CartCounter>().removeFromCartPage(id);
+    print(id);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
+    isInCart = [...context.watch<CartCounter>().isinCart];
     Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
     return Scaffold(
         body: Column(children: [
@@ -193,7 +214,7 @@ class Product extends StatelessWidget {
       // ),
       Expanded(child: Container()),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -216,6 +237,9 @@ class Product extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               alignment: Alignment.center,
               height: 50,
@@ -224,14 +248,27 @@ class Product extends StatelessWidget {
                   color: Color(0xFF4C53A5),
                   borderRadius: BorderRadius.circular(20)),
               child: InkWell(
-                onTap: () => {Navigator.pushNamed(context, "/payment")},
-                child: Text(
-                  "Add to cart",
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
+                onTap: () => {
+                  // Navigator.pushNamed(context, "/payment")
+                  isInCart.contains(arguments['id'])
+                      ? removeCart(arguments['id'])
+                      : sendCart(arguments['id'])
+                },
+                child: isInCart.contains(arguments['id'])
+                    ? Text(
+                        "Remove From cart",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )
+                    : Text(
+                        "Add to cart",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
               ),
             )
           ],

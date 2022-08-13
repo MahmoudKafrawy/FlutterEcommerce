@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CategoriesProvider with ChangeNotifier {
   List _count = [];
   bool _fetchFlag = false;
-  String _catName = "";
+  String _catName = "groceries";
 
   List get count => [..._count];
   bool get fetchFlag => _fetchFlag;
